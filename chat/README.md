@@ -2,20 +2,23 @@
 
 **TODO: Add description**
 
-## Installation
+## Running Locally - Single Node
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `chat` to your list of dependencies in `mix.exs`:
+You can run the application locally simply via `iex -S mix`, this will run a single Node
+without any clustering.
 
-```elixir
-def deps do
-  [
-    {:chat, "~> 0.1.0"}
-  ]
-end
+## Running Locally - MultiNode
+
+To run a Cluster locally, run the application multiple times with unique Node names and a
+consistent cookie specified via `ERL_FLAGS`, for example this will run a 3 Node cluster:
+
 ```
+# Terminal 1
+$ ERL_FLAGS="-name chat1@127.0.0.1 -setcookie cookie" iex -S mix
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/chat](https://hexdocs.pm/chat).
+# Terminal 2
+$ ERL_FLAGS="-name chat2@127.0.0.1 -setcookie cookie" iex -S mix
 
+# Terminal 3
+$ ERL_FLAGS="-name chat3@127.0.0.1 -setcookie cookie" iex -S mix
+```
