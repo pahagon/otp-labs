@@ -1,0 +1,58 @@
+---
+  - name: "Setup Elixir"
+    hosts: localhost
+    connection: localhost
+    vars:
+      erlang_version: 24.3.4
+      elixir_version: 1.13.4
+    tasks:
+      - name: "Clone asdf"
+        git:
+          repo: https://github.com/asdf-vm/asdf.git
+          dest: '/home/pahagon/.asdf'
+          version: v0.8.0
+          clone: no
+          update: no
+
+      - name: Install erlang deps
+        package:
+          name:
+            - build-essential
+            - m4
+            - libncurses5-dev
+            - libwxgtk3.0-gtk3-dev
+            - libgl1-mesa-dev
+            - libglu1-mesa-dev
+            - libpng-dev
+            - libssh-dev
+            - unixodbc-dev
+            - xsltproc
+            - fop
+            - libxml2-utils
+            - libncurses-dev
+            - openjdk-11-jdk
+            - autoconf
+        become: yes
+
+      - name: Add erlang plugin to asdf [https://github.com/asdf-vm/asdf-erlang]
+        command: "asdf plugin-add erlang"
+        register: erlang_add
+        failed_when: erlang_add == 2
+
+      - name: Install erlang {{erlang_version}} with asdf
+        shell: ERLANG_OPENSSL_PATH=/usr/lib/x86_64-linux-gnu/ asdf install erlang {{erlang_version}}
+
+      - name: Set global version for erlang to {{erlang_version}}
+        command: "asdf global erlang {{erlang_version}}"
+
+      - name: Add elixir plugin to asdf [https://github.com/asdf-vm/asdf-elixir]
+        command: "asdf plugin-add elixir"
+        register: elixir_add
+        failed_when: elixir_add == 2
+
+      - name: Install elixir {{elixir_version}} with asdf
+        command: asdf install elixir {{elixir_version}}
+
+      - name: Set global version for elixir to {{elixir_version}}
+        command: "asdf global elixir {{elixir_version}}"
+
