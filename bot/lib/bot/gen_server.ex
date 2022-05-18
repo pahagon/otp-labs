@@ -1,4 +1,4 @@
-defmodule Chat.GenServer do
+defmodule Bot.GenServer do
   use GenServer
   require Logger
 

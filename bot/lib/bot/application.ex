@@ -1,4 +1,4 @@
-defmodule Chat.Application do
+defmodule Bot.Application do
   use Application
   require Logger
 
@@ -12,10 +12,10 @@ defmodule Chat.Application do
     ]
 
     children = [
-      {Cluster.Supervisor, [topologies, [name: Chat.ClusterSupervisor]]},
-      {Chat.GenServer, args}
+      {Cluster.Supervisor, [topologies, [name: Bot.ClusterSupervisor]]},
+      {Bot.GenServer, args}
     ]
 
-    Supervisor.start_link(children, strategy: :one_for_one, name: Chat.Supervisor)
+    Supervisor.start_link(children, strategy: :one_for_one, name: Bot.Supervisor)
   end
 end

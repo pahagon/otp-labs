@@ -1,4 +1,4 @@
-# Chat
+# Bot
 
 **TODO: Add description**
 
@@ -14,11 +14,11 @@ consistent cookie specified via `ERL_FLAGS`, for example this will run a 3 Node 
 
 ```
 # Terminal 1
-$ ERL_FLAGS="-name chat1@127.0.0.1 -setcookie cookie" iex -S mix
+$ ERL_FLAGS="-name bot1@127.0.0.1 -setcookie cookie" iex -S mix
 
 # Terminal 2
-$ ERL_FLAGS="-name chat2@127.0.0.1 -setcookie cookie" iex -S mix
+$ ERL_FLAGS="-name bot2@127.0.0.1 -setcookie cookie" iex -S mix
 
 # Terminal 3
-$ ERL_FLAGS="-name chat3@127.0.0.1 -setcookie cookie" iex -S mix
+$ ERL_FLAGS="-name bot3@127.0.0.1 -setcookie cookie" iex -S mix
 ```
