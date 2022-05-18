@@ -5,6 +5,8 @@
     vars:
       erlang_version: 24.3.4
       elixir_version: 1.13.4
+      minikube_version: 1.25.0
+      kubectl_version: 1.24.0
     tasks:
       - name: "Clone asdf"
         git:
@@ -53,6 +55,19 @@
       - name: Install elixir {{elixir_version}} with asdf
         command: asdf install elixir {{elixir_version}}
 
-      - name: Set global version for elixir to {{elixir_version}}
-        command: "asdf global elixir {{elixir_version}}"
+      - name: Add minikube plugin to asdf
+        command: "asdf plugin-add minikube"
+        register: minikube_add
+        failed_when: minikube_add == 2
+
+      - name: Install minikube {{minikube_version}} with asdf
+        command: asdf install minikube {{minikube_version}}
+
+      - name: Add kubectl plugin to asdf
+        command: "asdf plugin-add kubectl"
+        register: kubectl_add
+        failed_when: kubectl_add == 2
+
+      - name: Install kubectl {{kubectl_version}} with asdf
+        command: asdf install kubectl {{kubectl_version}}
 
