@@ -9,7 +9,7 @@
       - name: "Clone asdf"
         git:
           repo: https://github.com/asdf-vm/asdf.git
-          dest: '/home/pahagon/.asdf'
+          dest: "/home/{{ lookup('env', 'HOME') }}/.asdf"
           version: v0.8.0
           clone: no
           update: no
