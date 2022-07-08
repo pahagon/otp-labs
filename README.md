@@ -3,6 +3,11 @@
 OTP Labs is a demo application built with Elixir and OTP to show how to integrate
 Distributed Elixir on Kubernetes with Horde, LibCluster, and Distillery. 
 
+## References
+* https://david-delassus.medium.com/elixir-and-kubernetes-a-love-story-721cc6a5c7d5
+* https://mbuffa.github.io/tips/20201022-elixir-clustering-on-kubernetes/
+* https://engineering.dollarshaveclub.com/elixir-otp-applications-on-kubernetes-9944636b8609
+
 ## OTP
 OTP stands for Open Telecom Platform, although it's not that much about telecom 
 anymore (it's more about software that has the property of telecom applications, but yeah.) 
