@@ -22,7 +22,9 @@ defmodule Bot.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      { :libcluster, "~> 3.3.0" }
+      {:libcluster, "~> 3.3.0"},
+      {:vapor, "~> 0.10"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 end
