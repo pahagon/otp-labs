@@ -24,6 +24,7 @@ defmodule Bot.MixProject do
     [
       {:libcluster, "~> 3.3.0"},
       {:vapor, "~> 0.10"},
+      {:distillery, "~> 2.1"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
