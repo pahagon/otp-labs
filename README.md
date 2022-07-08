@@ -29,9 +29,9 @@ https://hexdocs.pm/horde/getting_started.
 
 ## Developing
 
-### Ubuntu
+### Setup local env for Ubuntu distro
 
-First step is: You should intall ansible
+Step 1: You should intall ansible
 
 ```sh 
 $ sudo apt update
@@ -40,16 +40,21 @@ $ sudo add-apt-repository --yes --update ppa:ansible/ansible
 $ sudo apt install ansible -v 2.9.6
 ```
 
-Second step is: You should clone this repo
+Step 2: You should clone this repo
 
 ```sh 
 $ git clone git@github.com:pahagon/otp-labs.git
 ```
 
-Third setup is: Ansible going to setup local environment
+Setup 3: You should run ansible in order to setup you local environment
 
 ```sh 
 $ cd PROJECT_PATH/ansible
 $ ansible-plabook localhost-dev.yml --ask-become
 ```
 
+Setup 4: Start minikube
+
+```sh
+$ minikube start
+```
