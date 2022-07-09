@@ -1,12 +1,6 @@
 # OTP Labs
-
 OTP Labs is a demo application built with Elixir and OTP to show how to integrate
 Distributed Elixir on Kubernetes with Horde, LibCluster, and Distillery. 
-
-## References
-* https://david-delassus.medium.com/elixir-and-kubernetes-a-love-story-721cc6a5c7d5
-* https://mbuffa.github.io/tips/20201022-elixir-clustering-on-kubernetes/
-* https://engineering.dollarshaveclub.com/elixir-otp-applications-on-kubernetes-9944636b8609
 
 ## OTP
 OTP stands for Open Telecom Platform, although it's not that much about telecom 
@@ -15,8 +9,10 @@ If half of Erlang's greatness comes from its concurrency and distribution and
 the other half comes from its error handling capabilities, 
 then the OTP framework is the third half of it.
 
-https://learnyousomeerlang.com/what-is-otp
-
+## Elixir
+Elixir is a functional, concurrent, general-purpose programming language that runs on the BEAM virtual machine 
+which is also used to implement the Erlang programming language. Elixir builds on top of Erlang and shares 
+the same abstractions for building distributed, fault-tolerant applications
 
 ## Horde
 Distribute your application over multiple servers with Horde.
@@ -24,8 +20,24 @@ Distribute your application over multiple servers with Horde.
 You should use Horde when you want a global supervisor (or global registry, or some combination of the two) 
 that supports automatic fail-over, dynamic cluster membership, and graceful node shutdown.
 
-https://moosecode.nl/blog/introducing_horde
-https://hexdocs.pm/horde/getting_started.
+## LibCluster
+This library provides a mechanism for automatically forming clusters of Erlang nodes, with either static or dynamic node membership. 
+It provides a pluggable "strategy" system, with a variety of strategies provided out of the box.
+
+## Distillery
+This is a pure-Elixir, dependency-free implementation of release generation for Elixir projects. It is currently a standalone package.
+It takes your Mix project and produces an Erlang/OTP release, a distilled form of your raw application's components; 
+a single package which can be deployed anywhere, independently of an Erlang/Elixir installation. No dependencies, no hassle.
+
+## References
+* https://david-delassus.medium.com/elixir-and-kubernetes-a-love-story-721cc6a5c7d5
+* https://mbuffa.github.io/tips/20201022-elixir-clustering-on-kubernetes/
+* https://engineering.dollarshaveclub.com/elixir-otp-applications-on-kubernetes-9944636b8609
+* https://learnyousomeerlang.com/what-is-otp
+* https://moosecode.nl/blog/introducing_horde
+* https://hexdocs.pm/horde/getting_started.
+* https://staknine.com/elixir-config-environment-variables/
+* https://hexdocs.pm/libcluster/readme.html
 
 ## Developing
 
