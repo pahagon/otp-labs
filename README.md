@@ -1,6 +1,6 @@
 # OTP Labs
 OTP Labs is a demo application built with Elixir and OTP to show how to integrate
-Distributed Elixir on Kubernetes with Horde, LibCluster, and Distillery. 
+Distributed Elixir on Kubernetes with Horde and LibCluster. 
 
 ## OTP
 OTP stands for Open Telecom Platform, although it's not that much about telecom 
@@ -23,11 +23,6 @@ that supports automatic fail-over, dynamic cluster membership, and graceful node
 ## LibCluster
 This library provides a mechanism for automatically forming clusters of Erlang nodes, with either static or dynamic node membership. 
 It provides a pluggable "strategy" system, with a variety of strategies provided out of the box.
-
-## Distillery
-This is a pure-Elixir, dependency-free implementation of release generation for Elixir projects. It is currently a standalone package.
-It takes your Mix project and produces an Erlang/OTP release, a distilled form of your raw application's components; 
-a single package which can be deployed anywhere, independently of an Erlang/Elixir installation. No dependencies, no hassle.
 
 ## References
 * https://david-delassus.medium.com/elixir-and-kubernetes-a-love-story-721cc6a5c7d5

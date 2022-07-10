@@ -54,3 +54,15 @@ $ make run-locally-multinode
 $ make run-locally-multinode
 ```
 
+## Running on `minikube`
+
+To run on `minikube`, start it up and then deploy the charts:
+
+```
+$(minikube docker-env)
+minikube image load bot:latest
+minikube cache reload
+
+$ kubectl create -f k8s/service-headless.yaml
+$ kubectl create -f k8s/deployment.yaml
+```
