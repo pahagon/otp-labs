@@ -2,9 +2,9 @@ defmodule Bot.ClusterStrategy do
   @moduledoc ~S"""
   """
 
-  def pick_topologies(topologie_strategy) do
+  def pick_topologies(cluster_strategy) do
     cond do
-      topologie_strategy == "" ->
+      cluster_strategy == "k8s-dns" ->
 	[
 	  bot: [
 	    strategy: Cluster.Strategy.Kubernetes.DNS,

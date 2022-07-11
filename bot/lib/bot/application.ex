@@ -3,10 +3,10 @@ defmodule Bot.Application do
   require Logger
 
   def start(type, args) do
-    Logger.log(:info, "Started Module[#{__MODULE__}] ARGS[#{inspect args}] TYPE[#{inspect type}]")
+    cluster_strategy = Application.fetch_env!(:bot, :cluster_strategy)
+    topologies = Bot.ClusterStrategy.pick_topologies(cluster_strategy)
 
-    topologie = Application.fetch_env!(:bot, :topologie)
-    topologies = Bot.ClusterStrategy.pick_topologies(topologie)
+    Logger.log(:info, "Starting Module[#{__MODULE__}] ARGS[#{inspect args}] TYPE[#{inspect type}] cluster_strategy[#{inspect cluster_strategy}] topologies[#{inspect topologies}]")
 
     children = [
       {Cluster.Supervisor, [topologies, [name: Bot.ClusterSupervisor]]},

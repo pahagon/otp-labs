@@ -1,4 +1,4 @@
 import Config
 
-config :bot, topologie: System.get_env("topologie")
+config :bot, cluster_strategy: System.get_env("CLUSTER_TOPOLOGIE")
 
