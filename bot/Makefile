@@ -27,9 +27,9 @@ run-docker: ## Run the app in Docker
 	--expose 4000 -p 4000:4000 \
 	--rm -it $(APP_NAME):latest
 
-build-clean:
-	docker image rm $(APP_NAME):$(APP_VSN)-$(BUILD) $(APP_NAME):latest && \
+build-clean: ## Delete docker image
 	kubectl delete deployments $(APP_NAME)-deployment && \
+	kubectl delete service $(APP_NAME)-svc-headless && \
 	kubectl delete pod -l app=$(APP_NAME) && \
-	docker image prune -af
+	docker image rm $(APP_NAME):$(APP_VSN)-$(BUILD) $(APP_NAME):latest
 

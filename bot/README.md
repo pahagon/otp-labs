@@ -54,15 +54,27 @@ $ make run-locally-multinode
 $ make run-locally-multinode
 ```
 
+## Running Locally - Docker
+First you should create docker image
+
+```
+$ make build
+```
+
+After that you may run the app in docker
+```
+$ make run-docker
+```
+
 ## Running on `minikube`
 
 To run on `minikube`, start it up and then deploy the charts:
 
 ```
-$(minikube docker-env)
-minikube image load bot:latest
-minikube cache reload
-
+$ $(minikube docker-env)
+$ make build
+$ minikube image load bot:latest
+$ minikube cache reload
 $ kubectl create -f k8s/service-headless.yaml
 $ kubectl create -f k8s/deployment.yaml
 ```
