@@ -10,7 +10,7 @@ defmodule Bot.ClusterStrategy do
 	    strategy: Cluster.Strategy.Kubernetes,
 	    config: [
 	      kubernetes_node_basename: "bot",
-	      kubernetes_selector: "app=bot,tier=otu",
+	      kubernetes_selector: "app=bot,tier=otp",
 	      kubernetes_namespace: "default",
 	    ]
 	  ]
