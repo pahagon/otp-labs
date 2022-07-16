@@ -23,6 +23,7 @@ defmodule Bot.MixProject do
   defp deps do
     [
       {:libcluster, "~> 3.3.0"},
+      {:horde, "~> 0.8.7"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
