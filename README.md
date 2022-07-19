@@ -33,6 +33,12 @@ It provides a pluggable "strategy" system, with a variety of strategies provided
 * https://hexdocs.pm/horde/getting_started.
 * https://staknine.com/elixir-config-environment-variables/
 * https://hexdocs.pm/libcluster/readme.html
+* https://firewalltimes.com/load-balancing-vs-server-clustering/
+* https://ulisses.dev/elixir/2022/03/04/elixir-modules-files-directories-and-naming-conventions.html
+* https://cve.mitre.org/cgi-bin/cvename.cgi?name=2020-24719
+* https://samuelmullen.com/articles/elixir-processes-observability/
+* https://codesync.global/media/observability-for-elixir-microservices-cbf20/
+* https://github.com/erlef/observability-wg
 
 ## Developing
 
