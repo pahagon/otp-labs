@@ -1,4 +1,6 @@
 defmodule Bot.Application do
+  @moduledoc false
+
   use Application
   require Logger
 
@@ -9,6 +11,8 @@ defmodule Bot.Application do
     Logger.log(:info, "Starting Module[#{__MODULE__}] ARGS[#{inspect args}] TYPE[#{inspect type}] cluster_strategy[#{inspect cluster_strategy}] topologies[#{inspect topologies}]")
 
     children = [
+      {Horde.Registry, [name: Bot.Registry, keys: :unique]},
+      {Horde.DynamicSupervisor, [name: Bot.DistributedSupervisor, strategy: :one_for_one]},
       {Cluster.Supervisor, [topologies, [name: Bot.ClusterSupervisor]]},
       {Bot.GenServer, args}
     ]
