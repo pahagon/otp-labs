@@ -4,11 +4,15 @@ defmodule Bot.Application do
   use Application
   require Logger
 
+  @impl true
   def start(type, args) do
     cluster_strategy = Application.fetch_env!(:bot, :cluster_strategy)
     topologies = Bot.ClusterStrategy.pick_topologies(cluster_strategy)
 
-    Logger.log(:info, "Starting Module[#{__MODULE__}] ARGS[#{inspect args}] TYPE[#{inspect type}] cluster_strategy[#{inspect cluster_strategy}] topologies[#{inspect topologies}]")
+    Logger.log(
+      :info,
+      "Starting Module[#{__MODULE__}] ARGS[#{inspect(args)}] TYPE[#{inspect(type)}] cluster_strategy[#{inspect(cluster_strategy)}] topologies[#{inspect(topologies)}]"
+    )
 
     children = [
       {Horde.Registry, [name: Bot.Registry, keys: :unique]},
