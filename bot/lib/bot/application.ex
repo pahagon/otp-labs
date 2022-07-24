@@ -6,7 +6,7 @@ defmodule Bot.Application do
 
   @impl true
   def start(type, args) do
-    cluster_strategy = Application.fetch_env!(:bot, :cluster_strategy) |> String.to_atom()
+    cluster_strategy = Application.fetch_env!(:bot, :cluster_strategy)
     topologies = Application.fetch_env!(:bot, cluster_strategy)
 
     Logger.log(
