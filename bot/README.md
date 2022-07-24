@@ -79,10 +79,10 @@ $ make run-docker
 To run on `minikube`, start it up and then deploy the charts:
 
 ```
-$ $(minikube docker-env)
+$ eval $(minikube -p minikube docker-env)
 $ make build
 $ minikube image load bot:latest
 $ minikube cache reload
-$ kubectl create -f k8s/service-headless.yaml
-$ kubectl create -f k8s/deployment.yaml
+$ kubectl create -f k8s/service-headless.yml
+$ kubectl create -f k8s/deployment.yml
 ```
