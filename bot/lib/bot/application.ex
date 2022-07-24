@@ -6,12 +6,12 @@ defmodule Bot.Application do
 
   @impl true
   def start(type, args) do
-    cluster_strategy = Application.fetch_env!(:bot, :cluster_strategy)
-    topologies = Bot.ClusterStrategy.pick_topologies(cluster_strategy)
+    cluster_strategy = Application.fetch_env!(:bot, :cluster_strategy) |> String.to_atom()
+    topologies = Application.fetch_env!(:bot, cluster_strategy)
 
     Logger.log(
       :info,
-      "Starting Module[#{__MODULE__}] ARGS[#{inspect(args)}] TYPE[#{inspect(type)}] cluster_strategy[#{inspect(cluster_strategy)}] topologies[#{inspect(topologies)}]"
+      "Starting [#{__MODULE__}] ARGS[#{inspect(args)}] TYPE[#{inspect(type)}] cluster_strategy[#{inspect(cluster_strategy)}] topologies[#{inspect(topologies)}]"
     )
 
     children = [
