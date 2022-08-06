@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: <%= @project_name |> String.replace("_", "-") %>-svc-headless
+  namespace: default
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - port: 4369
+      targetPort: epmd
+      protocol: TCP
+      name: epmd
+  selector:
+    app: <%= @project_name |> String.replace("_", "-") %>
+    tier: otp 

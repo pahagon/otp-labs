@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <%= @project_name |> String.replace("_", "-") %>-deployment
+  namespace: default
+  labels:
+    app: <%= @project_name |> String.replace("_", "-") %>
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: <%= @project_name |> String.replace("_", "-") %> 
+      tier: otp 
+  template:
+    metadata:
+      labels:
+        app: <%= @project_name |> String.replace("_", "-") %> 
+        tier: otp 
+    spec:
+      containers:
+        - name: <%= @project_name |> String.replace("_", "-") %>
+          image: <%= @project_name |> String.replace("_", "-") %>:latest
+          imagePullPolicy: Never
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: CLUSTER_STRATEGY
+              value: k8s_gossip
+          ports:
+            - name: epmd
+              containerPort: 4369
+              protocol: TCP
