@@ -3,5 +3,5 @@ This project uses template system created by [dave thomas](https://pragdave.me/b
 
 ## Installation
 ```shell
-mix template install hex otp_libcluster_horde_template_project
+make clone_pragdave_repos install_template_system install_otp_libcluster_horde_template
 ```
