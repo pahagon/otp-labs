@@ -1,4 +1,4 @@
-.PHONY: 
+.PHONY:
 
 APP_NAME ?= `grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g'`
 APP_VSN ?= `grep 'version:' mix.exs | cut -d '"' -f2`
@@ -11,7 +11,7 @@ help:
 run-locally-single: ## Running Locally - Single Node
 	iex -S mix
 
-RANDOM ?= `head -128 /dev/urandom | cksum | cut -d ' ' -f1`j
+RANDOM ?= `head -128 /dev/urandom | cksum | cut -d ' ' -f1`
 run-locally-multinode: ## Running Locally - MultiNode
 	ERL_FLAGS="-name bot$(RANDOM)@127.0.0.1 -setcookie cookie" iex -S mix
 
