@@ -17,11 +17,13 @@ install_template_system: ## Install locally Dave Thomas template system
 	cd $(TMP_DIR) && mix archive.install hex mix_generator && \
 	mix archive.install hex mix_templates
 
+remove_template_system: ## Delete template system
+	rm -rf $(MIX_ARC_DIR)/mix_generator* && \
+	rm -rf $(MIX_ARC_DIR)/mix_templates*
+
 install_otp_libcluster_horde_template: ## Install OTP, libcluster, horde project template
 	cd .. && mix template.install template
 
 remove_otp_libcluster_horde_template: ## Delete OTP, libcluster, horde projecect template
-	rm -rf $(MIX_ARC_DIR)/mix_generator* && \
-	rm -rf $(MIX_ARC_DIR)/mix_templates* && \
 	rm -rf $(MIX_ARC_DIR)/otp_libcluster_horde*
 
