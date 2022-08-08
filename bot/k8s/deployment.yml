@@ -10,12 +10,12 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: bot 
+      app: bot
       tier: otp 
   template:
     metadata:
       labels:
-        app: bot 
+        app: bot
         tier: otp 
     spec:
       containers:

@@ -2,7 +2,6 @@ defmodule Bot.GenServer do
   use GenServer
   require Logger
 
-  @impl true
   def child_spec(opts) do
     name = Keyword.get(opts, :name, __MODULE__)
 
@@ -14,7 +13,6 @@ defmodule Bot.GenServer do
     }
   end
 
-  @impl true
   def start_link(name) do
     Logger.log(:info, "#{__MODULE__} start_link #{inspect(name)}")
 

@@ -1,5 +1,4 @@
-# Bot
-
+# bot
 **TODO: Add description**
 
 ## Developing
@@ -32,17 +31,17 @@ consistent cookie specified via `ERL_FLAGS`, for example this will run a 3 Node 
 
 ##### Terminal 1
 ```sh
-$ ERL_FLAGS="-name bot1@127.0.0.1 -setcookie cookie" iex -S mix
+$ ERL_FLAGS="-name Bot1@127.0.0.1 -setcookie cookie" iex -S mix
 ```
 
 ##### Terminal 2
 ```sh
-$ ERL_FLAGS="-name bot2@127.0.0.1 -setcookie cookie" iex -S mix
+$ ERL_FLAGS="-name Bot2t@127.0.0.1 -setcookie cookie" iex -S mix
 ```
 
 ##### Terminal 3
 ```sh
-$ ERL_FLAGS="-name bot3@127.0.0.1 -setcookie cookie" iex -S mix
+$ ERL_FLAGS="-name Bot3@127.0.0.1 -setcookie cookie" iex -S mix
 ```
 
 or you may use make

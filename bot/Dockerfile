@@ -4,17 +4,8 @@ ARG ALPINE_VERSION=3.16
 
 FROM elixir:1.13.4-alpine AS builder
 
-# The following are build arguments used to change variable parts of the image.
-# The name of your application/release (required)
-ARG APP_NAME
-# The version of the application we are building (required)
-ARG APP_VSN
 # The environment to build with
-ARG MIX_ENV=prod
-
-ENV APP_NAME=${APP_NAME} \
-    APP_VSN=${APP_VSN} \
-    MIX_ENV=${MIX_ENV}
+ENV MIX_ENV=prod
 
 # By convention, /opt is typically used for applications
 WORKDIR /opt/app
