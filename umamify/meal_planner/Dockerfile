@@ -30,7 +30,7 @@ RUN mix release
 FROM alpine:${ALPINE_VERSION}
 
 # The name of your application/release (required)
-ARG APP_NAME=brainiac
+ARG APP_NAME=meal_planner
 ARG MIX_ENV=prod
 
 RUN apk update && \

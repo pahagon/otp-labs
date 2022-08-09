@@ -1,15 +1,15 @@
 import Config
 
-config :brainiac,
+config :meal_planner,
   k8s_gossip: [
-brainiac: [
+meal_planner: [
       strategy: Cluster.Strategy.Gossip
     ]
   ]
 
-config :brainiac,
+config :meal_planner,
   epmd: [
-brainiac: [
+meal_planner: [
       strategy: Elixir.Cluster.Strategy.LocalEpmd
     ]
   ]

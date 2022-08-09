@@ -2,25 +2,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: brainiac-deployment
+  name: meal-planner-deployment
   namespace: default
   labels:
-    app: brainiac
+    app: meal-planner
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: brainiac
+      app: meal-planner
       tier: otp 
   template:
     metadata:
       labels:
-        app: brainiac
+        app: meal-planner
         tier: otp 
     spec:
       containers:
-        - name: brainiac
-          image: brainiac:latest
+        - name: meal-planner
+          image: meal-planner:latest
           imagePullPolicy: Never
           env:
             - name: POD_IP

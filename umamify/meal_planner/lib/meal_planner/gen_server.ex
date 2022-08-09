@@ -1,4 +1,4 @@
-defmodule Brainiac.GenServer do
+defmodule MealPlanner.GenServer do
   use GenServer
   require Logger
 
@@ -32,5 +32,5 @@ defmodule Brainiac.GenServer do
     state
   end
 
-  defp via_tuple(name), do: {:via, Horde.Registry, {Brainiac.Registry, name}}
+  defp via_tuple(name), do: {:via, Horde.Registry, {MealPlanner.Registry, name}}
 end

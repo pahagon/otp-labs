@@ -1,9 +1,9 @@
-defmodule Brainiac.MixProject do
+defmodule MealPlanner.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :brainiac,
+      app: :meal_planner,
       version: "0.1.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
@@ -15,7 +15,7 @@ defmodule Brainiac.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Brainiac.Application, []}
+      mod: {MealPlanner.Application, []}
     ]
   end
 

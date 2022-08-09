@@ -1,0 +1,2 @@
+defmodule MealPlanner do
+end

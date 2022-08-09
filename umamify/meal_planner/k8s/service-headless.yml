@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: brainiac-svc-headless
+  name: meal-planner-svc-headless
   namespace: default
 spec:
   type: ClusterIP
@@ -13,5 +13,5 @@ spec:
       protocol: TCP
       name: epmd
   selector:
-    app: brainiac
+    app: meal-planner
     tier: otp 

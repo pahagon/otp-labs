@@ -1,4 +1,4 @@
-# brainiac
+# meal_planner
 **TODO: Add description**
 
 ## Developing
@@ -16,7 +16,7 @@ You can run the application locally simply via `iex -S mix`, this will run a sin
 without any clustering.
 
 ```sh
-$ ERL_FLAGS="-name brainiac1@127.0.0.1 -setcookie cookie" iex -S mix
+$ ERL_FLAGS="-name meal_planner1@127.0.0.1 -setcookie cookie" iex -S mix
 ```
 
 or you may use make
@@ -31,17 +31,17 @@ consistent cookie specified via `ERL_FLAGS`, for example this will run a 3 Node 
 
 ##### Terminal 1
 ```sh
-$ ERL_FLAGS="-name Brainiac1@127.0.0.1 -setcookie cookie" iex -S mix
+$ ERL_FLAGS="-name MealPlanner1@127.0.0.1 -setcookie cookie" iex -S mix
 ```
 
 ##### Terminal 2
 ```sh
-$ ERL_FLAGS="-name Brainiac2t@127.0.0.1 -setcookie cookie" iex -S mix
+$ ERL_FLAGS="-name MealPlanner2t@127.0.0.1 -setcookie cookie" iex -S mix
 ```
 
 ##### Terminal 3
 ```sh
-$ ERL_FLAGS="-name Brainiac3@127.0.0.1 -setcookie cookie" iex -S mix
+$ ERL_FLAGS="-name MealPlanner3@127.0.0.1 -setcookie cookie" iex -S mix
 ```
 
 or you may use make
@@ -80,7 +80,7 @@ To run on `minikube`, start it up and then deploy the charts:
 ```
 $ eval $(minikube -p minikube docker-env)
 $ make build
-$ minikube image load brainiac:latest
+$ minikube image load meal-planner:latest
 $ minikube cache reload
 $ kubectl create -f k8s/service-headless.yml
 $ kubectl create -f k8s/deployment.yml
