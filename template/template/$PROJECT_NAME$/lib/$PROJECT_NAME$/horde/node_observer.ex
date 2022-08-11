@@ -6,10 +6,16 @@ defmodule <%= @project_name_camel_case %>.Horde.NodeObserver do
   use GenServer
   require Logger
 
-  def start_link(_), do: GenServer.start_link(__MODULE__, [])
+  def start_link(_) do
+    Logger.log(:info, "Starting #{__MODULE__}")
+
+    GenServer.start_link(__MODULE__, [])
+  end
 
   @impl true
   def init(_) do
+    Logger.log(:info, "init #{__MODULE__}")
+
     :net_kernel.monitor_nodes(true, node_type: :visible)
 
     {:ok, nil}

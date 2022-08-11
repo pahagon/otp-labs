@@ -4,13 +4,18 @@ defmodule Bot.Horde.Registry do
   """
 
   use Horde.Registry
+  require Logger
 
   def start_link(_) do
+    Logger.log(:info, "Starting #{__MODULE__}")
+
     Horde.Registry.start_link(__MODULE__, [keys: :unique], name: __MODULE__)
   end
 
   @impl true
   def init(init_arg) do
+    Logger.log(:info, "init #{__MODULE__} #{inspect(init_arg)}")
+
     [members: members()]
     |> Keyword.merge(init_arg)
     |> Horde.Registry.init()

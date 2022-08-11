@@ -4,4 +4,4 @@ config :bot, cluster_strategy: System.get_env("CLUSTER_STRATEGY", "epmd") |> Str
 
 config :logger, :console,
   level: System.get_env("LOG_LEVEL", "debug") |> String.to_atom(),
-  format: "$time $message $metadata[$level] \n"
+  format: "$time $metadata[$level] $message \n"
