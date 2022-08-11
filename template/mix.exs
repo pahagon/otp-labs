@@ -8,7 +8,7 @@ defmodule OtpLibclusterHordeTemplateProject.Mixfile do
 
     [
       app: @name,
-      version: "0.1.0",
+      version: "0.0.1",
       deps: deps(),
       elixir: "~> 1.13",
       package: package(),

@@ -15,9 +15,10 @@ defmodule <%= @project_name_camel_case %>.Application do
     )
 
     children = [
-      {Horde.Registry, [name: <%= @project_name_camel_case %>.Registry, keys: :unique]},
-      {Horde.DynamicSupervisor, [name: <%= @project_name_camel_case %>.DistributedSupervisor, strategy: :one_for_one]},
       {Cluster.Supervisor, [topologies, [name: <%= @project_name_camel_case %>.ClusterSupervisor]]},
+      <%= @project_name_camel_case %>.Horde.Registry,
+      <%= @project_name_camel_case %>.Horde.Supervisor,
+      <%= @project_name_camel_case %>.Horde.NodeObserver,
       {<%= @project_name_camel_case %>.GenServer, args}
     ]
 

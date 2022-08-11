@@ -32,5 +32,5 @@ defmodule <%= @project_name_camel_case %>.GenServer do
     state
   end
 
-  defp via_tuple(name), do: {:via, Horde.Registry, {<%= @project_name_camel_case %>.Registry, name}}
+  defp via_tuple(name), do: {:via, Horde.Registry, {<%= @project_name_camel_case %>.Horde.Registry, name}}
 end

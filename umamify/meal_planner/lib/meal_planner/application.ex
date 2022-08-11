@@ -15,10 +15,10 @@ defmodule MealPlanner.Application do
     )
 
     children = [
-      {Horde.Registry, [name: MealPlanner.Registry, keys: :unique]},
-      {Horde.DynamicSupervisor,
-       [name: MealPlanner.DistributedSupervisor, strategy: :one_for_one]},
       {Cluster.Supervisor, [topologies, [name: MealPlanner.ClusterSupervisor]]},
+      MealPlanner.Horde.Registry,
+      MealPlanner.Horde.Supervisor,
+      MealPlanner.Horde.NodeObserver,
       {MealPlanner.GenServer, args}
     ]
 

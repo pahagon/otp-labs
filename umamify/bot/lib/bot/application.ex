@@ -15,9 +15,10 @@ defmodule Bot.Application do
     )
 
     children = [
-      {Horde.Registry, [name: Bot.Registry, keys: :unique]},
-      {Horde.DynamicSupervisor, [name: Bot.DistributedSupervisor, strategy: :one_for_one]},
       {Cluster.Supervisor, [topologies, [name: Bot.ClusterSupervisor]]},
+      Bot.Horde.Registry,
+      Bot.Horde.Supervisor,
+      Bot.Horde.NodeObserver,
       {Bot.GenServer, args}
     ]
 

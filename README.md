@@ -39,4 +39,8 @@ It provides a pluggable "strategy" system, with a variety of strategies provided
 * https://samuelmullen.com/articles/elixir-processes-observability/
 * https://codesync.global/media/observability-for-elixir-microservices-cbf20/
 * https://github.com/erlef/observability-wg
-
+* https://bigardone.dev/blog/2021/06/27/three-real-world-examples-of-distributed-elixir-pt-4
+* https://www.freecodecamp.org/news/how-to-build-a-distributed-game-of-life-in-elixir-9152588100cd/
+* https://medium.com/wttj-tech/elixir-how-to-distribute-mnesia-between-multiple-nodes-cb7c851b1ed1
+* https://github.com/meh/amnesia
+* https://blog.appsignal.com/2020/05/19/using-mnesia-in-an-elixir-application.html

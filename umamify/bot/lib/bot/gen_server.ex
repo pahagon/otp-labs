@@ -32,5 +32,5 @@ defmodule Bot.GenServer do
     state
   end
 
-  defp via_tuple(name), do: {:via, Horde.Registry, {Bot.Registry, name}}
+  defp via_tuple(name), do: {:via, Horde.Registry, {Bot.Horde.Registry, name}}
 end
