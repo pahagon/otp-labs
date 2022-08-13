@@ -25,7 +25,8 @@ defmodule MealPlanner.MixProject do
       {:libcluster, "~> 3.3.0"},
       {:horde, "~> 0.8.7"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:timex, "~> 3.7.9"}
+      {:timex, "~> 3.7.9"},
+      {:mnesiac, "~> 0.3"},
     ]
   end
 end
