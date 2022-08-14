@@ -48,7 +48,7 @@ And them you need install the OTP-libcluster-horde template project
 make install_otp_libcluster_horde_template
 ```
 
-## Create a new project
+## Creating a new project
 
 Let's say you want create a project with name __foo__
 
