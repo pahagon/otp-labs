@@ -1,35 +1,37 @@
 # Project that ties otp, kubernetes, libcluster and hord
-This project is an elixir project generator for all projects in otp-labs. 
+
+This project is an elixir project generator for all projects in otp-labs.
 It tries to save a couple of your minutes tidying configuration and dependency.
 
 This OTP template project generates:
-    * Libcluster configuration:
-      * You can choose libcluster strategy(gossip or local epmd) from environment var.
-    * Elixir Release configuration:
-      * Project sname configured with pattern  @release.name@POD_A_RECORD.$NAMESPACE.pod.cluster.local.
-    * Dockerfile:
-      * There is Dockerfile that describe a recipe to create a app using linux alphine.
-    * Deployment and services k8s:
-      * Deployment file that:
-        * Exports pod_ip, namespace and cluster_strategy (default: gossip).
-        * Exports epmd port.
-      * Service file that:
-        * Create a cluster.
-        * Export empd port to all nodes.
-    * Elixir Application that starts with:
-      * Libcluster Supervisor.
-      * Horde Subervisor and Registry.
-      * NodeObserver in order to Horde Supervisor and Registry when nodes joint and leave the cluster.
-      * "Empty" GenServer
-    * Makefile with tasks:
-      * run locally single-node
-      * run locally multinode
-      * build docker image
-      * run locally on docker
-      * load docker image to minikube
-      * create deployment and service on minikube
-      * remove docker image from docker, remove deployment and services from minikube
-      
+
+- Libcluster configuration:
+  - You can choose libcluster strategy(gossip or local epmd) from environment var.
+- Elixir Release configuration:
+  - Project sname configured with pattern  @release.name@POD_A_RECORD.$NAMESPACE.pod.cluster.local.
+- Dockerfile:
+  - There is Dockerfile that describe a recipe to create a app using linux alphine.
+- Deployment and services k8s:
+  - Deployment file that:
+    - Exports pod_ip, namespace and cluster_strategy (default: gossip).
+    - Exports epmd port.
+  - Service file that:
+    - Create a cluster.
+    - Export empd port to all nodes.
+- Elixir Application that starts with:
+  - Libcluster Supervisor.
+  - Horde Subervisor and Registry.
+  - NodeObserver in order to Horde Supervisor and Registry when nodes joint and leave the cluster.
+  - "Empty" GenServer
+- Makefile with tasks:
+  - run locally single-node
+  - run locally multinode
+  - build docker image
+  - run locally on docker
+  - load docker image to minikube
+  - create deployment and service on minikube
+  - remove docker image from docker, remove deployment and services from minikube
+
 This project uses template system created by [dave thomas](https://pragdave.me/blog/2017/04/18/elixir-project-generator.html).
 
 ## Installation
@@ -52,10 +54,11 @@ Let's say you want create a project with name __foo__
 
 ```shell
 mix gen otp_libcluster_horde_template_project foo
+```
 
 output:
 
-```shell
+```
 * creating ./foo
 * creating ./foo/mix.exs
 * creating ./foo/.credo.exs
@@ -93,6 +96,7 @@ Successfully generated foo in .
 ```
 
 make sure __epmd__ is running
+
 ```shell
 epmd -daemon
 ```
@@ -101,7 +105,11 @@ epmd -daemon
 
 ```shell
 cd foo && mix do format, deps.get, compile && make run-locally-multinode 
+```
 
+Output:
+
+```
 Resolving Hex dependencies...
 Dependency resolution completed:
 New:
@@ -184,7 +192,11 @@ You should open another terminal session and type
 
 ```shell
 make run-locally-multinode
+```
 
+Output:
+
+```
 ERL_FLAGS="-name `grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g' | sed -r 's/_([a-z])/-\1/gi'`-`head -128 /dev/urandom | cksum | cut -d ' ' -f1`j@127.0.0.1 -setcookie cookie" iex -S mix
 Erlang/OTP 24 [erts-12.3.2] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit]
 
@@ -206,7 +218,7 @@ iex(foo-2931448500j@127.0.0.1)1>
 
 You are going to see in the first terminal, node joining in to cluster
 
-``` shell
+```
 21:55:15.509 [info] [Elixir.Foo.Horde.NodeObserver].handle_info :nodeup - :"foo-2931448500j@127.0.0.1"
 21:55:15.829 [info] Elixir.Foo.GenServer start_link Foo.GenServer
 21:55:15.840 [info] already started at #PID<21469.272.0>, returning :ignore
@@ -214,7 +226,7 @@ You are going to see in the first terminal, node joining in to cluster
 
 You can check the nodes that has joined to the cluster.
 
-``` shell
+```
 iex(foo-2931448500j@127.0.0.1)1> Node.list()
 [:"foo-2378306091j@127.0.0.1"]
 ```
@@ -224,21 +236,26 @@ That's it, There is a little cluster on you localhost.
 ### Running on minikube
 
 Make sure minikube is running
-``` shell
+
+```shell
 minikube start
 ```
 
 Run on minikube
 
-``` shell
+```shell
 eval $(minikube -p minikube docker-env) && make build && make kubectl-create
 ```
 
 You can check if application is running on minukube.
 
-``` shell
+```shell
 kubectl get pods
+```
 
+Output
+
+```
 NAME                                     READY   STATUS    RESTARTS        AGE
 foo-deployment-58dd7578dd-5prlc          1/1     Running   0               63s
 foo-deployment-58dd7578dd-6f9vv          1/1     Running   0               63s
@@ -247,9 +264,13 @@ foo-deployment-58dd7578dd-pvs97          1/1     Running   0               63s
 
 You can check if all nodes are connected.
 
-``` shell
+```shell
 docker ps
+```
 
+Output:
+
+```
 CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS     NAMES
 35e7960d8dfe   949c9ac5cc58           "/bin/sh -c '/opt/ap…"   3 minutes ago   Up 3 minutes             k8s_foo_foo-deployment-58dd7578dd-5prlc_default_e3d426da-1656-4d7b-b80c-c47ba00fb403_0
 16295998097c   949c9ac5cc58           "/bin/sh -c '/opt/ap…"   3 minutes ago   Up 3 minutes             k8s_foo_foo-deployment-58dd7578dd-6f9vv_default_aceaa742-d622-4759-a9e3-9e08f1c0852a_0
@@ -258,17 +279,19 @@ CONTAINER ID   IMAGE                  COMMAND                  CREATED         S
 
 You should copy one of listed container id and connect via bash.
 
-``` shell
+```shell
 docker exec -it 35e7960d8dfe /bin/bash
-
-bash-5.1#
 ```
 
 Now you are able to connect on node remotelly
 
-``` shell
+```shell
 cd bin/ && ./foo remote
+```
 
+Output:
+
+```
 Erlang/OTP 24 [erts-12.3.2.2] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit:no-native-stack]
 
 Interactive Elixir (1.13.4) - press Ctrl+C to exit (type h() ENTER for help)
@@ -277,11 +300,10 @@ iex(foo@172-17-0-13.default.pod.cluster.local)1>
 
 You can check which node are connected on cluster.
 
-``` shell
+```
 iex(foo@172-17-0-13.default.pod.cluster.local)1> Node.list()
 [:"foo@172-17-0-12.default.pod.cluster.local",
  :"foo@172-17-0-11.default.pod.cluster.local"]
 ```
 
 Voalá
-
