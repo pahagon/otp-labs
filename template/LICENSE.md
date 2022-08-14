@@ -1,8 +1,8 @@
--------------------------------------------------------
+______________________________________________________________________
 
 __Copyright © 2022 [Paulo Ahagon](mailto:pahagon@gmail.com)__
 
--------------------------------------------------------
+______________________________________________________________________
 
 Licensed under the Apache License, Version 2.0 (_the License_);
 you may not use these files except in compliance with the License.
@@ -15,4 +15,3 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 Created:  2022-08-06Z
-
