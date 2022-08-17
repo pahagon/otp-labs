@@ -111,14 +111,19 @@ end
 
 defmodule MealPlanner.Recipe do
   @moduledoc false
-  defstruct title: nil, instructions: nil, ingredients: nil
+  defstruct id: nil, title: nil, instructions: nil, ingredients: nil
 
   alias MealPlanner.Recipe.Item
 
   @typedoc ~S"""
   Type that represents Recipe
   """
-  @type t :: %__MODULE__{title: String.t(), instructions: String.t(), ingredients: list(Item.t())}
+  @type t :: %__MODULE__{
+          id: integer(),
+          title: String.t(),
+          instructions: String.t(),
+          ingredients: list(Item.t())
+        }
 
   @doc ~S"""
   This function check if is a recipe is valid
@@ -127,20 +132,20 @@ defmodule MealPlanner.Recipe do
       iex> item_1 = %MealPlanner.Recipe.Item{name: "pasta", qty: 0.1, unit: :kg}
       iex> item_2 = %MealPlanner.Recipe.Item{name: "chicken", qty: 0.3, unit: :kg}
       iex> itens = [item_1, item_2]
-      iex> recipe = %MealPlanner.Recipe{title: "Chicken Pasta", instructions: "Cookie", ingredients: itens}
+      iex> recipe = %MealPlanner.Recipe{id: 1, title: "Chicken Pasta", instructions: "Cookie", ingredients: itens}
       iex> MealPlanner.Recipe.valid?(recipe)
       {:ok, recipe}
 
       iex> item_1 = %MealPlanner.Recipe.Item{}
       iex> item_2 = %MealPlanner.Recipe.Item{name: "chicken", qty: 0.3, unit: :kg}
       iex> itens = [item_1, item_2]
-      iex> recipe = %MealPlanner.Recipe{title: "Chicken Pasta", instructions: "Cookie", ingredients: itens}
+      iex> recipe = %MealPlanner.Recipe{id: 1, title: "Chicken Pasta", instructions: "Cookie", ingredients: itens}
       iex> MealPlanner.Recipe.valid?(recipe)
       {:error, "There are/is itens with error", recipe}
 
       iex> recipe = %MealPlanner.Recipe{}
       iex> MealPlanner.Recipe.valid?(recipe)
-      {:error, "title is nil, instructions is nil, ingredients is nil", recipe}
+      {:error, "title is nil, instructions is nil, ingredients is nil, id is nil", recipe}
 
       iex> MealPlanner.Recipe.valid?(nil)
       {:error, "recipe is nil", nil}
@@ -195,19 +200,20 @@ defmodule MealPlanner.Recipe do
   end
 end
 
-defmodule MealPlanner.Recipe.MnesiacStore do
+defmodule MealPlanner.Mnesiac.RecipeStore do
   @moduledoc """
   Provides the structure of Menesia records.
   """
   use Mnesiac.Store
   import Record
+  alias MealPlanner.Recipe
 
   @doc """
-  Record definition for ExampleStore example record.
+  Record definition for Recipe.
   """
   defrecord(
     :recipe,
-    MealPlanner.Recipe,
+    __MODULE__,
     id: nil,
     title: nil,
     instructions: nil,
@@ -215,15 +221,15 @@ defmodule MealPlanner.Recipe.MnesiacStore do
   )
 
   @typedoc """
-  ExampleStore example record field type definitions.
+  recipe record
   """
   @type recipe ::
           record(
             :recipe,
-            id: String.t(),
+            id: integer(),
             title: String.t(),
             instructions: Strint.t(),
-            ingredients: list(MealPlanner.Recipe.Item.t())
+            ingredients: list(Recipe.Item.t())
           )
 
   @impl true
@@ -231,7 +237,64 @@ defmodule MealPlanner.Recipe.MnesiacStore do
     do: [
       record_name: :recipe,
       attributes: recipe() |> recipe() |> Keyword.keys(),
-      index: [:recipe_id],
-      ram_copies: [node()]
+      # index: [:recipe_id],
+      disc_copies: [node()]
     ]
+
+  @doc """
+  Serialization
+  """
+  def decode({:recipe, id, title, instructions, ingredients}) do
+    %Recipe{id: id, title: title, instructions: instructions, ingredients: ingredients}
+  end
+
+  @doc """
+  deserialization
+  """
+  def encode(%Recipe{id: id, title: title, instructions: instructions, ingredients: ingredients}) do
+    {:recipe, id, title, instructions, ingredients}
+  end
+
+  @doc ~S"""
+  This function check if is a recipe is valid
+
+  ## Examples
+      iex> item_1 = %MealPlanner.Recipe.Item{name: "pasta", qty: 0.1, unit: :kg}
+      iex> item_2 = %MealPlanner.Recipe.Item{name: "chicken", qty: 0.3, unit: :kg}
+      iex> itens = [item_1, item_2]
+      iex> recipe = %MealPlanner.Recipe{id: 1, title: "Chicken Pasta", instructions: "Cookie", ingredients: itens}
+      iex> MealPlanner.Mnesiac.RecipeStore.create(recipe)
+      {:ok, recipe}
+  """
+  def create(%Recipe{id: id} = state) when is_integer(id) do
+    {:atomic, reason} =
+      :mnesia.transaction(fn ->
+        case :mnesia.read(:recipe, id, :write) do
+          [] ->
+            state |> encode() |> :mnesia.write()
+
+          _ ->
+            :record_exists
+        end
+      end)
+
+    reason
+  end
+
+  def list() do
+    :mnesia.transaction(fn ->
+      :mnesia.match_object({:recipe, :_, :_, :_, :_})
+    end)
+    |> case do
+      {:atomic, list} -> Enum.map(list, &decode(&1))
+      {:aborted, {:no_exists, MealPlanner.Recipe}} -> []
+    end
+  end
+
+  @impl true
+  def resolve_conflict(node) do
+    Logger.warn("RESOLVE CONFLICT #{inspect(node())} vs #{inspect(node)}")
+
+    copy_store()
+  end
 end

@@ -3,4 +3,5 @@ defmodule MealPlanner.RecipeTest do
 
   doctest MealPlanner.Recipe
   doctest MealPlanner.Recipe.Item
+  doctest MealPlanner.Mnesiac.RecipeStore
 end

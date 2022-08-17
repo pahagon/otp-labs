@@ -15,5 +15,5 @@ config :meal_planner,
   ]
 
 config :mnesiac,
-  stores: [MealPlanner.Recipe.MnesiacStore],
+  stores: [MealPlanner.Mnesiac.RecipeStore],
   schema_type: :disc_copies

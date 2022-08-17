@@ -15,8 +15,7 @@ defmodule MealPlanner.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {MealPlanner.Application, []},
-      included_applications: [:mnesia]
+      mod: {MealPlanner.Application, []}
     ]
   end
 

@@ -18,8 +18,6 @@ defmodule Umamify.Mnesia.NodeObserver do
 
     :net_kernel.monitor_nodes(true, node_type: :visible)
 
-    Mnesiac.init_mnesia(Node.list())
-
     {:ok, state}
   end
 
@@ -27,8 +25,7 @@ defmodule Umamify.Mnesia.NodeObserver do
   def handle_info({:nodeup, node, _node_type}, state) do
     Logger.log(:info, "[#{__MODULE__}].handle_info :nodeup - #{inspect(node)} ")
 
-    :ok = Mnesiac.start()
-    {:ok, _nodes} = :mnesia.change_config(:extra_db_nodes, [node])
+    Mnesiac.connect(node)
 
     {:noreply, state}
   end
@@ -37,7 +34,7 @@ defmodule Umamify.Mnesia.NodeObserver do
   def handle_info({:nodedown, node, _node_type}, state) do
     Logger.log(:info, "[#{__MODULE__}].handle_info :nodown - #{inspect(node)} ")
 
-    :mnesia.change_config(:extra_db_nodes, Node.list())
+    # :mnesia.change_config(:extra_db_nodes, Node.list())
 
     {:noreply, state}
   end

@@ -51,3 +51,4 @@ It provides a pluggable "strategy" system, with a variety of strategies provided
 - https://github.com/meh/amnesia
 - https://blog.appsignal.com/2020/05/19/using-mnesia-in-an-elixir-application.html
 - https://medium.com/blackode/elixir-application-start-phases-6ef649845b44
+- https://mbuffa.github.io/tips/20201111-elixir-troubleshooting-mnesia/

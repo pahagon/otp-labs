@@ -8,4 +8,4 @@ config :logger, :console,
   format: "$time $metadata[$level] $message \n"
 
 config :mnesia,
-  dir: System.get_env("MNESIA_DIR") || '/tmp/mnesia.#{Mix.env}.#{node()}'
+  dir: System.get_env("MNESIA_DIR") || '/tmp/mnesia.#{Mix.env()}.#{node()}'

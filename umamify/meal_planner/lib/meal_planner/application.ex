@@ -19,6 +19,7 @@ defmodule MealPlanner.Application do
       Umamify.Horde.Registry,
       Umamify.Horde.Supervisor,
       Umamify.Horde.NodeObserver,
+      Umamify.Mnesia.Supervisor,
       Umamify.Mnesia.NodeObserver,
       {MealPlanner.GenServer, args}
     ]
