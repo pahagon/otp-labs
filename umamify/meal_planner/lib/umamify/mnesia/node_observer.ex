@@ -27,7 +27,8 @@ defmodule Umamify.Mnesia.NodeObserver do
   def handle_info({:nodeup, node, _node_type}, state) do
     Logger.log(:info, "[#{__MODULE__}].handle_info :nodeup - #{inspect(node)} ")
 
-    Mnesiac.connect(node)
+    :ok = Mnesiac.start()
+    {:ok, _nodes} = :mnesia.change_config(:extra_db_nodes, [node])
 
     {:noreply, state}
   end

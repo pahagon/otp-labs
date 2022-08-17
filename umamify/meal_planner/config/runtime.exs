@@ -6,3 +6,6 @@ config :meal_planner,
 config :logger, :console,
   level: System.get_env("LOG_LEVEL", "debug") |> String.to_atom(),
   format: "$time $metadata[$level] $message \n"
+
+config :mnesia,
+  dir: System.get_env("MNESIA_DIR") || '/tmp/mnesia.#{Mix.env}.#{node()}'
