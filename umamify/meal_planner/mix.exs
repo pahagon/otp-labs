@@ -15,7 +15,8 @@ defmodule MealPlanner.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {MealPlanner.Application, []}
+      mod: {MealPlanner.Application, []},
+      included_applications: [:mnesia]
     ]
   end
 
@@ -26,7 +27,7 @@ defmodule MealPlanner.MixProject do
       {:horde, "~> 0.8.7"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:timex, "~> 3.7.9"},
-      {:mnesiac, "~> 0.3"},
+      {:mnesiac, "~> 0.3"}
     ]
   end
 end

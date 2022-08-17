@@ -194,3 +194,44 @@ defmodule MealPlanner.Recipe do
     )
   end
 end
+
+defmodule MealPlanner.Recipe.MnesiacStore do
+  @moduledoc """
+  Provides the structure of Menesia records.
+  """
+  use Mnesiac.Store
+  import Record
+
+  @doc """
+  Record definition for ExampleStore example record.
+  """
+  defrecord(
+    :recipe,
+    MealPlanner.Recipe,
+    id: nil,
+    title: nil,
+    instructions: nil,
+    ingredients: nil
+  )
+
+  @typedoc """
+  ExampleStore example record field type definitions.
+  """
+  @type recipe ::
+          record(
+            :recipe,
+            id: String.t(),
+            title: String.t(),
+            instructions: Strint.t(),
+            ingredients: list(MealPlanner.Recipe.Item.t())
+          )
+
+  @impl true
+  def store_options,
+    do: [
+      record_name: :recipe,
+      attributes: recipe() |> recipe() |> Keyword.keys(),
+      index: [:recipe_id],
+      ram_copies: [node()]
+    ]
+end

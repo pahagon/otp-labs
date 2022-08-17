@@ -32,5 +32,5 @@ defmodule MealPlanner.GenServer do
     state
   end
 
-  defp via_tuple(name), do: {:via, Horde.Registry, {MealPlanner.Horde.Registry, name}}
+  defp via_tuple(name), do: {:via, Horde.Registry, {Umamify.Horde.Registry, name}}
 end

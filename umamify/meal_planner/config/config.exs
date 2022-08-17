@@ -13,3 +13,9 @@ config :meal_planner,
       strategy: Elixir.Cluster.Strategy.LocalEpmd
     ]
   ]
+
+config :mnesiac,
+  stores: [MealPlanner.Recipe.MnesiacStore],
+  schema_type: :disc_copies
+
+config :mnesia, dir: '/tmp/mnesia.#{Mix.env}.#{node()}'

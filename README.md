@@ -50,3 +50,4 @@ It provides a pluggable "strategy" system, with a variety of strategies provided
 - https://medium.com/wttj-tech/elixir-how-to-distribute-mnesia-between-multiple-nodes-cb7c851b1ed1
 - https://github.com/meh/amnesia
 - https://blog.appsignal.com/2020/05/19/using-mnesia-in-an-elixir-application.html
+- https://medium.com/blackode/elixir-application-start-phases-6ef649845b44

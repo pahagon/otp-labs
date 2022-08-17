@@ -1,4 +1,4 @@
-.PHONY: 
+.PHONY:
 
 APP_NAME ?= `grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g' | sed -r 's/_([a-z])/-\1/gi'`
 APP_VSN ?= `grep 'version:' mix.exs | cut -d '"' -f2`

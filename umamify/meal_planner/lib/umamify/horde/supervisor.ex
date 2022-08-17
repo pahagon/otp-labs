@@ -1,4 +1,4 @@
-defmodule MealPlanner.Horde.Supervisor do
+defmodule Umamify.Horde.Supervisor do
   @moduledoc ~S"""
   This module is used for supervisioning nodes dynamically.
   """

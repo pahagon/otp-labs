@@ -1,4 +1,4 @@
-defmodule MealPlanner.Horde.Registry do
+defmodule Umamify.Horde.Registry do
   @moduledoc ~S"""
   This module is used for regestering nodes dynamically.
   """
