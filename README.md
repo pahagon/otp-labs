@@ -51,7 +51,7 @@ Create a project with all this things using [otp-labs project template](https://
 
 ## Real world example
 
-The distributed application meal planner called (Umamify)[https://github.com/pahagon/otp-labs/blob/main/umamify/README.md]
+The distributed application meal planner called [Umamify](https://github.com/pahagon/otp-labs/blob/main/umamify/README.md)
 
 ## References
 
