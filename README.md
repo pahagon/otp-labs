@@ -3,31 +3,55 @@
 OTP Labs is a demo application built with Elixir and OTP to show how to integrate
 Distributed Elixir on Kubernetes with Horde and LibCluster.
 
-## OTP
+This project ties up:
 
-OTP stands for Open Telecom Platform, although it's not that much about telecom
-anymore (it's more about software that has the property of telecom applications, but yeah.)
-If half of Erlang's greatness comes from its concurrency and distribution and
-the other half comes from its error handling capabilities,
-then the OTP framework is the third half of it.
+- Elixir Application with:
+  - Libcluster Supervisor.
+  - Horde Subervisor and Registry.
+  - NodeObserver in order to Horde Supervisor and Registry add and remove nodes from cluster.
+- Libcluster config:
+  - You can choose libcluster strategy(gossip or local epmd) from environment var.
+  - You can add more libcluster strategies.
+- Dockerfile:
+  - Create an app image using linux alphine.
+- Kubernete Deployment and Service file:
+  - Deployment file:
+    - Creates pods with app image, exports pod_ip, namespace and cluster_strategy (default: gossip).
+    - Exports epmd port.
+  - Service file:
+    - Creates a cluster.
+    - Exports empd port to all nodes.
+- Elixir Release config:
+  - Project sname configured using the following pattern @release.name@POD_A_RECORD.$NAMESPACE.pod.cluster.local.
+- Makefile with tasks:
+  - Run locally single-node.
+  - Run locally multi-node.
+  - Build docker image.
+  - Run locally on docker.
+  - Load docker image on minikube.
+  - Create deployment and service on minikube
+  - Remove docker image from docker, remove deployment and services from minikube
 
-## Elixir
+## Setup local environment on Ubuntu
 
-Elixir is a functional, concurrent, general-purpose programming language that runs on the BEAM virtual machine
-which is also used to implement the Erlang programming language. Elixir builds on top of Erlang and shares
-the same abstractions for building distributed, fault-tolerant applications
+There is [ansible recipe](https://github.com/pahagon/otp-labs/blob/main/ansible/README.md) that helps setup local environment.
 
-## Horde
+First, you should intall ansible ;)
 
-Distribute your application over multiple servers with Horde.
+```sh
+$ sudo apt update
+$ sudo apt install software-properties-common
+$ sudo add-apt-repository --yes --update ppa:ansible/ansible
+$ sudo apt install ansible -v 2.9.6
+```
 
-You should use Horde when you want a global supervisor (or global registry, or some combination of the two)
-that supports automatic fail-over, dynamic cluster membership, and graceful node shutdown.
+## Use this setup in your project
 
-## LibCluster
+Create a project with all this things using [otp-labs project template](https://github.com/pahagon/otp-labs/blob/main/template/README.md).
 
-This library provides a mechanism for automatically forming clusters of Erlang nodes, with either static or dynamic node membership.
-It provides a pluggable "strategy" system, with a variety of strategies provided out of the box.
+## Real world example
+
+The distributed application meal planner called (Umamify)[https://github.com/pahagon/otp-labs/blob/main/umamify/README.md]
 
 ## References
 
