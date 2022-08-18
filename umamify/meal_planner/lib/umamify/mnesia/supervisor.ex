@@ -5,6 +5,7 @@ defmodule Umamify.Mnesia.Supervisor do
 
   def start_link(args) do
     Logger.log(:info, "Starting #{__MODULE__}")
+
     Supervisor.start_link(__MODULE__, args, name: __MODULE__)
   end
 
