@@ -30,9 +30,12 @@ defmodule MealPlanner.Planner do
     end
   end
 
-  defp default(geo, datetime) do
+  @spec default(Geolocation.t(), Timex.DateTime.t()) :: Suggestion.t()
+  def default(geo, datetime) do
   end
 
   def refuse_suggestion(suggestion, user, geo, datetime) do
+    %User{id: user_id, tags: tags} = user
+    SuggStore.refuse(suggestion, user_id, tags, geo, dateime)
   end
 end

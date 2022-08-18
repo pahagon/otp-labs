@@ -32,4 +32,7 @@ defmodule MealPlanner.Mnesiac.SuggestionStore do
 
   def by_geo(geolocation, datetime) do
   end
+
+  def refuse(suggestion, user_id, tags, geo, dateime) do
+  end
 end

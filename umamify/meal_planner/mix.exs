@@ -28,6 +28,7 @@ defmodule MealPlanner.MixProject do
       {:timex, "~> 3.7.9"},
       {:mnesiac, "~> 0.3"},
       {:decimal, "~> 2.0"},
+      {:umamify, path: "../core"},
     ]
   end
 end

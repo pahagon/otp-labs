@@ -6,6 +6,7 @@ defmodule Umamify.Horde.Supervisor do
   use Horde.DynamicSupervisor
   require Logger
 
+  @doc false
   def start_link(_) do
     Logger.log(:info, "Starting #{__MODULE__}")
 
@@ -21,7 +22,7 @@ defmodule Umamify.Horde.Supervisor do
     |> Horde.DynamicSupervisor.init()
   end
 
-  @impl true
+  @doc false
   def start_child(child_spec) do
     Logger.log(:info, "Starting child #{__MODULE__} #{inspect(child_spec)}")
 
