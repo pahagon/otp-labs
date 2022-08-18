@@ -1,18 +1,17 @@
 defmodule Umamify.User do
   @moduledoc false
-  defstruct id: nil, name: nil
+  defstruct id: nil, name: nil, tags: nil
 
   @typedoc ~S"""
   Type that represents User
   """
-  @type t :: %__MODULE__{id: String.t(), name: String.t()}
+  @type t :: %__MODULE__{id: integer(), name: String.t(), tags: list(String.t())}
 
   @doc ~S"""
   This function check if is an user is valid
 
   ## Examples
-      iex> user_id = :crypto.strong_rand_bytes(10) |> Base.encode16
-      iex> user = %Umamify.User{id: user_id}
+      iex> user = %Umamify.User{id: 1}
       iex> Umamify.User.valid?(user)
       {:ok, user}
 

@@ -1,6 +1,6 @@
 defmodule Umamify.Horde.NodeObserver do
   @moduledoc ~S"""
-  This module is used for updateing Horde Registry and Supervisor dynamically.
+  This module is used for notify dynamically Horde Registry and Supervisor when a new node up or down.
   """
 
   use GenServer

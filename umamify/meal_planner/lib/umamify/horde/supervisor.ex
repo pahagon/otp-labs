@@ -1,6 +1,6 @@
 defmodule Umamify.Horde.Supervisor do
   @moduledoc ~S"""
-  This module is used for supervisioning nodes dynamically.
+  This module is used for initialize nodes dynamically.
   """
 
   use Horde.DynamicSupervisor

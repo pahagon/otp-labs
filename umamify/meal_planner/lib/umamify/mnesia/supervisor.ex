@@ -1,8 +1,12 @@
 defmodule Umamify.Mnesia.Supervisor do
-  @moduledoc false
+  @moduledoc ~S"""
+  This module is used for initialize mnesia with nodes dynamically.
+  """
+
   require Logger
   use Supervisor
 
+  @doc false
   def start_link(args) do
     Logger.log(:info, "Starting #{__MODULE__}")
 

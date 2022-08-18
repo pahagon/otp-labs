@@ -1,6 +1,6 @@
 defmodule Umamify.Horde.Registry do
   @moduledoc ~S"""
-  This module is used for regestering nodes dynamically.
+  This module is used for registering nodes dynamically.
   """
 
   use Horde.Registry

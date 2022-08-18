@@ -1,49 +1,38 @@
 defmodule MealPlanner.Planner do
   @moduledoc ~S"""
-  This module is used for creating meal suggestions
+  This module is used for make meal suggestion.
   """
 
   alias Timex.DateTime
   alias Umamify.User
+  alias Umamify.Geolocation
+
   alias MealPlanner.Recipe
-  # alias MealPlanner.Recipe.Item
+  alias MealPlanner.RecipeStore
 
-  @typedoc ~S"""
-  Type that represents User Recipe Suggestion.
-  """
-  @type user_recipe_suggestion_t ::
-          {:ok, Recipe.t(), User.t(), DateTime.t()} | {:error, String.t(), User.t(), DateTime.t()}
+  alias MealPlanner.Suggestion
+  alias MealPlanner.Mnesia.SuggestionStore, as: SuggStore
 
-  @doc ~S"""
-  Suggest a recipe to a give user and datetime.
+  @spec make_suggestion(User.t(), Geolocation.t(), Timex.DateTime.t()) :: Suggestion.t()
+  def make_suggestion(user, geo, datetime) do
+    %User{id: user_id, tags: tags} = user
 
-  ## Examples
-
-      iex> user_id = :crypto.strong_rand_bytes(10) |> Base.encode16
-      iex> now = Timex.now()
-      iex> user = %Umamify.User{id: user_id}
-      iex> MealPlanner.Planner.suggest_recipe_for(user, now)
-      {:error, "yo", %Umamify.User{id: user_id}, now}
-  """
-  @spec suggest_recipe_for(User.t(), Datetime.t()) :: user_recipe_suggestion_t
-  def suggest_recipe_for(user, datetime) do
-    {:error, "yo", user, datetime}
+    with {:suggestion_not_found, :by_user_id} <- SuggStore.get_by_user_id(user_id, datetime),
+         {:suggestion_not_found, :by_trending} <- SuggStore.get_by_trending(geo, datetime),
+         {:suggestion_not_found, :by_tags} <- SuggStore.get_by_tags(tags, datetime),
+         {:suggestion_found, :by_geo, suggestion} <- SuggStore.by_geo(geo, datetime) do
+      suggestion
+    else
+      {:suggestion_found, :by_user_id, suggestion} -> suggestion
+      {:suggestion_found, :by_trending, suggestion} -> suggestion
+      {:suggestion_found, :by_tag, suggestion} -> suggestion
+      {:suggestion_not_found, :by_geo} -> default(geo, datetime)
+    end
   end
 
-  @doc ~S"""
-  Register user acceptance for recipe suggestion.
+  defp default(geo, datetime) do
+  end
 
-  ## Examples
-
-      iex> user_id = :crypto.strong_rand_bytes(10) |> Base.encode16
-      iex> now = Timex.now()
-      iex> user = %Umamify.User{id: user_id}
-      iex> recipe = %MealPlanner.Recipe{}
-      iex> MealPlanner.Planner.accept_recipe_suggestion({:ok, recipe, user, now})
-      {:error, "yo", %Umamify.User{id: user_id}, now}
-  """
-  @spec accept_recipe_suggestion(user_recipe_suggestion_t) :: user_recipe_suggestion_t
-  def accept_recipe_suggestion({:ok, _recipe, user, datetime}) do
-    {:error, "yo", user, datetime}
+  def refuse_suggestion(suggestion, user, geo, datetime) do
   end
 end

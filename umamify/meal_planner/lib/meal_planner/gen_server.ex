@@ -2,6 +2,7 @@ defmodule MealPlanner.GenServer do
   use GenServer
   require Logger
 
+  @doc false
   def child_spec(opts) do
     name = Keyword.get(opts, :name, __MODULE__)
 
@@ -13,6 +14,7 @@ defmodule MealPlanner.GenServer do
     }
   end
 
+  @doc false
   def start_link(name) do
     Logger.log(:info, "#{__MODULE__} start_link #{inspect(name)}")
 

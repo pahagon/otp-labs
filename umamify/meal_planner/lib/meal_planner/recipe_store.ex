@@ -1,6 +1,6 @@
 defmodule MealPlanner.Mnesiac.RecipeStore do
   @moduledoc ~S"""
-  Provides the structure of Menesia records.
+  This module initialize, adds and list Recipe mnesia record.
   """
   use Mnesiac.Store
   alias MealPlanner.Recipe
@@ -21,9 +21,12 @@ defmodule MealPlanner.Mnesiac.RecipeStore do
     copy_store()
   end
 
+  @type recipe_record_t :: {:recipe, integer(), String.t(), String.t(), list(Recipe.Item.t())}
+
   @doc ~S"""
   Serialization
   """
+  @spec decode(recipe_record_t) :: Recipe.t()
   def decode({:recipe, id, title, instructions, ingredients}) do
     %Recipe{id: id, title: title, instructions: instructions, ingredients: ingredients}
   end
@@ -31,6 +34,7 @@ defmodule MealPlanner.Mnesiac.RecipeStore do
   @doc ~S"""
   Deserialization
   """
+  @spec encode(Recipe.t()) :: recipe_record_t
   def encode(%Recipe{id: id, title: title, instructions: instructions, ingredients: ingredients}) do
     {:recipe, id, title, instructions, ingredients}
   end
@@ -46,19 +50,22 @@ defmodule MealPlanner.Mnesiac.RecipeStore do
       iex> MealPlanner.Mnesiac.RecipeStore.create(recipe)
       :ok
   """
-  def create(%Recipe{id: id} = state) when is_integer(id) do
-    {:atomic, reason} =
-      :mnesia.transaction(fn ->
-        case :mnesia.read(:recipe, id, :write) do
-          [] ->
-            state |> encode() |> :mnesia.write()
+  @spec create(Recipe.t()) :: :ok | {:error, any()}
+  def create(%Recipe{id: id} = recipe) when is_integer(id) do
+    :mnesia.transaction(fn ->
+      case :mnesia.read(:recipe, id, :write) do
+        [] ->
+          recipe |> encode() |> :mnesia.write()
 
-          _ ->
-            :record_exists
-        end
-      end)
-
-    reason
+        _ ->
+          :record_exists
+      end
+    end)
+    |> case do
+      {:atomic, :ok} -> :ok
+      {:atomic, :record_exists} -> :ok
+      {:aborted, reason} -> {:error, reason}
+    end
   end
 
   @doc ~S"""
@@ -70,7 +77,7 @@ defmodule MealPlanner.Mnesiac.RecipeStore do
       iex> itens = [item_1, item_2]
       iex> recipe = %MealPlanner.Recipe{id: 2, title: "Chicken Pasta", instructions: "Cookie", ingredients: itens}
       iex> MealPlanner.Mnesiac.RecipeStore.create(recipe)
-      iex> MealPlanner.Mnesiac.RecipeStore.list()
+      iex> MealPlanner.Mnesiac.RecipeStore.list() |> Enum.filter(&(&1.id == 2))
       [
         %MealPlanner.Recipe{
           id: 2,
@@ -83,13 +90,14 @@ defmodule MealPlanner.Mnesiac.RecipeStore do
         }
       ]
   """
+  @spec list() :: list(Recipe.t()) | []
   def list() do
     :mnesia.transaction(fn ->
       :mnesia.match_object({:recipe, :_, :_, :_, :_})
     end)
     |> case do
       {:atomic, list} -> Enum.map(list, &decode(&1))
-      {:aborted, {:no_exists, MealPlanner.Recipe}} -> []
+      {:aborted, {:no_exists, :recipe}} -> []
     end
   end
 end
