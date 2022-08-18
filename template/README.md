@@ -3,7 +3,7 @@
 This project is an elixir project generator for all projects in otp-labs.
 It tries to save a couple of your minutes tidying configuration and dependency.
 
-This project uses template system created by [dave thomas](https://pragdave.me/blog/2017/04/18/elixir-project-generator.html).
+This project uses template system created by [Dave Thomas](https://pragdave.me/blog/2017/04/18/elixir-project-generator.html).
 
 ## Installation
 
@@ -13,7 +13,7 @@ First you need install the template system.
 make clone_pragdave_repos install_template_system
 ```
 
-And them you need install the OTP-libcluster-horde template project
+And then you need install the OTP-libcluster-horde template project
 
 ```shell
 make install_otp_libcluster_horde_template
