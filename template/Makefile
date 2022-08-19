@@ -3,8 +3,8 @@
 TMP_DIR=/tmp/otp-labs
 TPLS_DIR=$(TMP_DIR)/mix_templates
 GEN_DIR=$(TMP_DIR)/mix_generator
-ELIXIR_VER=`asdf current elixir | sed -r 's/\s+/ /g' | cut -d ' ' -f 2`
-MIX_ARC_DIR=${ASDF_DIR}/installs/elixir/$(ELIXIR_VER)/.mix/archives/
+ELIXIR_VER=`asdf current elixir | sed -r 's/\s+/ /g' | cut -d ' ' -f 2)`
+MIX_ARC_DIR=${ASDF_DIR}/installs/elixir/$(ELIXIR_VER)/.mix/templates
 
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -26,4 +26,3 @@ install_otp_libcluster_horde_template: ## Install OTP, libcluster, horde project
 
 remove_otp_libcluster_horde_template: ## Delete OTP, libcluster, horde projecect template
 	rm -rf $(MIX_ARC_DIR)/otp_libcluster_horde*
-
