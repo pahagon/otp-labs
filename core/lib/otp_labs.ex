@@ -1,5 +1,3 @@
 defmodule OTPLabs do
-  @moduledoc """
-  Documentation for `OTPLabs`.
-  """
+  @moduledoc File.read!(Path.join([__DIR__, "../README.md"]))
 end
