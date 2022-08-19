@@ -43,11 +43,11 @@ defmodule OTPLabs.MixProject do
   defp deps do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:horde, "~> 0.8.7"},
-      {:mnesiac, "~> 0.3"},
       {:ex_doc, "~> 0.11", only: :dev},
       {:earmark, "~> 0.1", only: :dev},
-      {:dialyxir, "~> 0.3", only: [:dev]}
+      {:dialyxir, "~> 0.3", only: [:dev]},
+      {:horde, "~> 0.8.7"},
+      {:mnesiac, "~> 0.3"},
     ]
   end
 end

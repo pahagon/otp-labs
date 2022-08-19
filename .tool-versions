@@ -1,4 +1,4 @@
 elixir 1.13.4
-minikube 1.26.0
+minikube 1.26.1
 kubectl 1.24.0
 
