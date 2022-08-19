@@ -22,9 +22,13 @@ defmodule Bot.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.11", only: :dev},
+      {:earmark, "~> 0.1", only: :dev},
+      {:dialyxir, "~> 0.3", only: [:dev]},
       {:libcluster, "~> 3.3.0"},
-      {:horde, "~> 0.8.7"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:otplabs, "~> 0.1"}
+      # {:otplabs, path: "../../otplabs-lib"}
     ]
   end
 end

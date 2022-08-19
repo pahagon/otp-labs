@@ -16,9 +16,9 @@ defmodule Bot.Application do
 
     children = [
       {Cluster.Supervisor, [topologies, [name: Bot.ClusterSupervisor]]},
-      Bot.Horde.Registry,
-      Bot.Horde.Supervisor,
-      Bot.Horde.NodeObserver,
+      OTPLabs.Horde.Registry,
+      OTPLabs.Horde.Supervisor,
+      OTPLabs.Horde.NodeObserver,
       {Bot.GenServer, args}
     ]
 
