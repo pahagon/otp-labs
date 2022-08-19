@@ -23,6 +23,7 @@ defmodule MealPlanner.MixProject do
   defp deps do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:libcluster, "~> 3.3.0"},
       {:umamify, path: "../core"},
       {:otplabs, path: "../../core"},
     ]
