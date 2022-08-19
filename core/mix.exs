@@ -23,7 +23,6 @@ defmodule OTPLabs.MixProject do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:horde, "~> 0.8.7"},
-      {:timex, "~> 3.7.9"},
       {:mnesiac, "~> 0.3"}
     ]
   end
