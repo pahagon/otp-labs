@@ -1,32 +1,32 @@
-defmodule Umamify.Horde.NodeObserver do
+defmodule OTPLabs.Mnesia.NodeObserver do
   @moduledoc ~S"""
-  This module is used for notify dynamically Horde Registry and Supervisor when a new node up or down.
+  This module is used for updateing Mnesia nodes dynamically.
   """
 
   use GenServer
   require Logger
 
-  def start_link(_) do
+  @doc false
+  def start_link(_opts) do
     Logger.log(:info, "Starting #{__MODULE__}")
 
-    GenServer.start_link(__MODULE__, [])
+    GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
   @impl true
-  def init(_) do
+  def init(state) do
     Logger.log(:info, "init #{__MODULE__}")
 
     :net_kernel.monitor_nodes(true, node_type: :visible)
 
-    {:ok, nil}
+    {:ok, state}
   end
 
   @impl true
   def handle_info({:nodeup, node, _node_type}, state) do
     Logger.log(:info, "[#{__MODULE__}].handle_info :nodeup - #{inspect(node)} ")
 
-    set_members(Umamify.Horde.Registry)
-    set_members(Umamify.Horde.Supervisor)
+    Mnesiac.connect(node)
 
     {:noreply, state}
   end
@@ -35,15 +35,8 @@ defmodule Umamify.Horde.NodeObserver do
   def handle_info({:nodedown, node, _node_type}, state) do
     Logger.log(:info, "[#{__MODULE__}].handle_info :nodown - #{inspect(node)} ")
 
-    set_members(Umamify.Horde.Registry)
-    set_members(Umamify.Horde.Supervisor)
+    # :mnesia.change_config(:extra_db_nodes, Node.list())
 
     {:noreply, state}
-  end
-
-  defp set_members(name) do
-    members = Enum.map([Node.self() | Node.list()], &{name, &1})
-
-    :ok = Horde.Cluster.set_members(name, members)
   end
 end

@@ -16,9 +16,9 @@ defmodule <%= @project_name_camel_case %>.Application do
 
     children = [
       {Cluster.Supervisor, [topologies, [name: <%= @project_name_camel_case %>.ClusterSupervisor]]},
-      <%= @project_name_camel_case %>.Horde.Registry,
-      <%= @project_name_camel_case %>.Horde.Supervisor,
-      <%= @project_name_camel_case %>.Horde.NodeObserver,
+      OTPLabs.Horde.Registry,
+      OTPLabs.Horde.Supervisor,
+      OTPLabs.Horde.NodeObserver,
       {<%= @project_name_camel_case %>.GenServer, args}
     ]
 

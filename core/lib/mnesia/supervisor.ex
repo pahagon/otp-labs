@@ -1,4 +1,4 @@
-defmodule Umamify.Mnesia.Supervisor do
+defmodule OTPLabs.Mnesia.Supervisor do
   @moduledoc ~S"""
   This module is used for initialize mnesia with nodes dynamically.
   """

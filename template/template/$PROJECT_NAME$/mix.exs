@@ -23,8 +23,7 @@ defmodule <%= @project_name_camel_case %>.MixProject do
   defp deps do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:libcluster, "~> 3.3.0"},
-      {:horde, "~> 0.8.7"},
+      {:otplabs, path: "../../core"},
       {:umamify, path: "../core"},
     ]
   end

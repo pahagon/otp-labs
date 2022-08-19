@@ -1,9 +1,9 @@
-defmodule MealPlanner.MixProject do
+defmodule OTPLabs.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :meal_planner,
+      app: :otplabs,
       version: "0.1.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
@@ -14,8 +14,7 @@ defmodule MealPlanner.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
-      mod: {MealPlanner.Application, []}
+      extra_applications: [:logger]
     ]
   end
 
@@ -23,8 +22,9 @@ defmodule MealPlanner.MixProject do
   defp deps do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:umamify, path: "../core"},
-      {:otplabs, path: "../../core"},
+      {:horde, "~> 0.8.7"},
+      {:timex, "~> 3.7.9"},
+      {:mnesiac, "~> 0.3"}
     ]
   end
 end

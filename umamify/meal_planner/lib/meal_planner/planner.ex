@@ -36,6 +36,6 @@ defmodule MealPlanner.Planner do
 
   def refuse_suggestion(suggestion, user, geo, datetime) do
     %User{id: user_id, tags: tags} = user
-    SuggStore.refuse(suggestion, user_id, tags, geo, dateime)
+    SuggStore.refuse(suggestion, user_id, tags, geo, datetime)
   end
 end

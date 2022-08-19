@@ -1,4 +1,4 @@
-defmodule Umamify.Horde.Supervisor do
+defmodule OTPLabs.Horde.Supervisor do
   @moduledoc ~S"""
   This module is used for initialize nodes dynamically.
   """

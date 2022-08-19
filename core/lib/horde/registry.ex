@@ -1,4 +1,4 @@
-defmodule Umamify.Horde.Registry do
+defmodule OTPLabs.Horde.Registry do
   @moduledoc ~S"""
   This module is used for registering nodes dynamically.
   """
@@ -6,6 +6,7 @@ defmodule Umamify.Horde.Registry do
   use Horde.Registry
   require Logger
 
+  @doc false
   def start_link(_) do
     Logger.log(:info, "Starting #{__MODULE__}")
 

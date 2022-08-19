@@ -16,11 +16,11 @@ defmodule MealPlanner.Application do
 
     children = [
       {Cluster.Supervisor, [topologies, [name: MealPlanner.ClusterSupervisor]]},
-      Umamify.Horde.Registry,
-      Umamify.Horde.Supervisor,
-      Umamify.Horde.NodeObserver,
-      Umamify.Mnesia.Supervisor,
-      Umamify.Mnesia.NodeObserver,
+      OTPLabs.Horde.Registry,
+      OTPLabs.Horde.Supervisor,
+      OTPLabs.Horde.NodeObserver,
+      OTPLabs.Mnesia.Supervisor,
+      OTPLabs.Mnesia.NodeObserver,
       {MealPlanner.GenServer, args}
     ]
 
