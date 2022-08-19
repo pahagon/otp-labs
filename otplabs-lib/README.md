@@ -3,7 +3,7 @@
 OTPLabs Core is lib that provides:
 - Horde, Mnesia Supervisor and Horde Registry.
   - Those loads nodes dynamically when they start. You should use libcluster to make nodes avaliable via Node.list().
-- Horde and Mnesia NodeObserver.
+- Horde and Mnesia NodeObserver GenServer.
   - Those recives notitication when a node up and down and update Horde and mnesia cluster.
 
 ## Installation
