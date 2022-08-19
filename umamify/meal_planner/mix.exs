@@ -36,6 +36,7 @@ defmodule MealPlanner.MixProject do
       {:dialyxir, "~> 0.3", only: [:dev]},
       {:libcluster, "~> 3.3.0"},
       {:otplabs, "~> 0.1"},
+      {:timex, "~> 3.7"},
       # {:otplabs, path: "../../otplabs-lib"}
     ]
   end
