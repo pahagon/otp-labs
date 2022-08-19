@@ -1,9 +1,12 @@
 defmodule MealPlanner.Recipe.Item do
-  @moduledoc false
+  @moduledoc ~S"""
+  This module represents Recipe Item.
+  """
+
   defstruct name: nil, qty: nil, unit: nil
 
   @typedoc ~S"""
-  Type that represents Recipe Item
+  Type that represents Recipe Item.
   """
   @type t :: %__MODULE__{name: String.t(), qty: float(), unit: atom()}
 

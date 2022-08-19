@@ -1,11 +1,14 @@
 defmodule MealPlanner.Recipe do
-  @moduledoc false
+  @moduledoc ~S"""
+  This module represents Recipe.
+  """
+
   defstruct id: nil, title: nil, instructions: nil, ingredients: nil
 
   alias MealPlanner.Recipe.Item
 
   @typedoc ~S"""
-  Type that represents Recipe
+  Type that represents Recipe.
   """
   @type t :: %__MODULE__{
           id: integer(),
