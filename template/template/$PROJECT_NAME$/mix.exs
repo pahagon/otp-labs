@@ -24,7 +24,7 @@ defmodule <%= @project_name_camel_case %>.MixProject do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:libcluster, "~> 3.3.0"},
-      {:otplabs, path: "../../core"},
+      {:otplabs, path: "../../otplabs-lib"},
       {:umamify, path: "../core"},
     ]
   end

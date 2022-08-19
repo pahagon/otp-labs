@@ -24,8 +24,8 @@ defmodule MealPlanner.MixProject do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:libcluster, "~> 3.3.0"},
+      {:otplabs, path: "../../otplabs-lib"},
       {:umamify, path: "../core"},
-      {:otplabs, path: "../../core"},
     ]
   end
 end
