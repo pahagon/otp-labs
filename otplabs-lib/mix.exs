@@ -9,7 +9,10 @@ defmodule OTPLabs.MixProject do
       start_permanent: Mix.env() == :prod,
       description: description(),
       package: package(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: [
+        plt_ignore_apps: [:mnesia]
+      ]
     ]
   end
 
@@ -41,7 +44,10 @@ defmodule OTPLabs.MixProject do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:horde, "~> 0.8.7"},
-      {:mnesiac, "~> 0.3"}
+      {:mnesiac, "~> 0.3"},
+      {:ex_doc, "~> 0.11", only: :dev},
+      {:earmark, "~> 0.1", only: :dev},
+      {:dialyxir, "~> 0.3", only: [:dev]}
     ]
   end
 end
