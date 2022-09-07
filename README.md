@@ -7,8 +7,8 @@ This project ties up:
 
 - Elixir Application with:
   - Libcluster Supervisor.
-  - Horde Subervisor and Registry.
-  - NodeObserver in order to Horde Supervisor and Registry add and remove nodes from cluster.
+  - Horde Supervisor and Registry.
+  - Node Observer. GenServer that make Horde Cluster update when node goes up or down.
 - Libcluster config:
   - You can choose libcluster strategy(gossip or local epmd) from environment var.
   - You can add more libcluster strategies.
@@ -71,8 +71,16 @@ The distributed application meal planner called [Umamify](https://github.com/pah
 - https://github.com/erlef/observability-wg
 - https://bigardone.dev/blog/2021/06/27/three-real-world-examples-of-distributed-elixir-pt-4
 - https://www.freecodecamp.org/news/how-to-build-a-distributed-game-of-life-in-elixir-9152588100cd/
+- https://elixirschool.com/en/lessons/storage/mnesia
 - https://medium.com/wttj-tech/elixir-how-to-distribute-mnesia-between-multiple-nodes-cb7c851b1ed1
 - https://github.com/meh/amnesia
 - https://blog.appsignal.com/2020/05/19/using-mnesia-in-an-elixir-application.html
 - https://medium.com/blackode/elixir-application-start-phases-6ef649845b44
 - https://mbuffa.github.io/tips/20201111-elixir-troubleshooting-mnesia/
+- https://elixirschool.com/en/lessons/basics/date_time
+- https://www.faqcode4u.com/faq/228588/erlang-mnesia-equivalent-of-sql-select-from-where-field-in-value1-value2-valu
+- https://runebook.dev/en/docs/erlang/lib/mnesia-4.19.1/doc/html/mnesia_chap3?page=3
+- https://dashbit.co/blog/mix-hex-registry-build
+- https://yos.io/2016/04/28/writing-and-publishing-elixir-libraries/
+- https://rapidapi.com/blog/how-to-use-geodb-cities-api/
+- https://www.youtube.com/watch?v=zUw_NY8LjTQ
