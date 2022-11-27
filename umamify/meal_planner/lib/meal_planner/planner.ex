@@ -3,13 +3,10 @@ defmodule MealPlanner.Planner do
   This module is used for make meal suggestion.
   """
 
-  alias Timex.DateTime
   alias Umamify.User
   alias Umamify.Geolocation
 
   alias MealPlanner.Recipe
-  alias MealPlanner.RecipeStore
-
   alias MealPlanner.Suggestion
   alias MealPlanner.Mnesia.SuggestionStore, as: SuggStore
 
@@ -18,8 +15,8 @@ defmodule MealPlanner.Planner do
     %User{id: user_id, tags: tags} = user
 
     with {:suggestion_not_found, :by_user_id} <- SuggStore.get_by_user_id(user_id, datetime),
-         {:suggestion_not_found, :by_trending} <- SuggStore.get_by_trending(geo, datetime),
          {:suggestion_not_found, :by_tags} <- SuggStore.get_by_tags(tags, datetime),
+         {:suggestion_not_found, :by_trending} <- SuggStore.get_by_trending(geo, datetime),
          {:suggestion_found, :by_geo, suggestion} <- SuggStore.by_geo(geo, datetime) do
       suggestion
     else
