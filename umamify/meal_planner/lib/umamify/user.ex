@@ -1,5 +1,7 @@
 defmodule Umamify.User do
-  @moduledoc false
+  @moduledoc ~S"""
+  This module represents an User.
+  """
   defstruct id: nil, name: nil, tags: nil
 
   @typedoc ~S"""

@@ -5,7 +5,7 @@ defmodule MealPlanner.Recipe do
 
   defstruct id: nil, title: nil, instructions: nil, ingredients: nil
 
-  alias MealPlanner.Recipe.Item
+  alias MealPlanner.Recipe.Ingredient
 
   @typedoc ~S"""
   Type that represents Recipe.
@@ -14,22 +14,22 @@ defmodule MealPlanner.Recipe do
           id: integer(),
           title: String.t(),
           instructions: String.t(),
-          ingredients: list(Item.t())
+          ingredients: list(Ingredient.t())
         }
 
   @doc ~S"""
   This function check if is a recipe is valid
 
   ## Examples
-      iex> item_1 = %MealPlanner.Recipe.Item{name: "pasta", qty: 0.1, unit: :kg}
-      iex> item_2 = %MealPlanner.Recipe.Item{name: "chicken", qty: 0.3, unit: :kg}
+      iex> item_1 = %MealPlanner.Recipe.Ingredient{name: "pasta", quantity: 0.1, unit: :kg}
+      iex> item_2 = %MealPlanner.Recipe.Ingredient{name: "chicken", quantity: 0.3, unit: :kg}
       iex> itens = [item_1, item_2]
       iex> recipe = %MealPlanner.Recipe{id: 1, title: "Chicken Pasta", instructions: "Cookie", ingredients: itens}
       iex> MealPlanner.Recipe.valid?(recipe)
       {:ok, recipe}
 
-      iex> item_1 = %MealPlanner.Recipe.Item{}
-      iex> item_2 = %MealPlanner.Recipe.Item{name: "chicken", qty: 0.3, unit: :kg}
+      iex> item_1 = %MealPlanner.Recipe.Ingredient{}
+      iex> item_2 = %MealPlanner.Recipe.Ingredient{name: "chicken", quantity: 0.3, unit: :kg}
       iex> itens = [item_1, item_2]
       iex> recipe = %MealPlanner.Recipe{id: 1, title: "Chicken Pasta", instructions: "Cookie", ingredients: itens}
       iex> MealPlanner.Recipe.valid?(recipe)
@@ -37,7 +37,7 @@ defmodule MealPlanner.Recipe do
 
       iex> recipe = %MealPlanner.Recipe{}
       iex> MealPlanner.Recipe.valid?(recipe)
-      {:error, "ingredients is nil, title is nil, instructions is nil, id is nil", recipe}
+      {:error, "title is nil, instructions is nil, ingredients is nil, id is nil", recipe}
 
       iex> MealPlanner.Recipe.valid?(nil)
       {:error, "recipe is nil", nil}
@@ -52,7 +52,7 @@ defmodule MealPlanner.Recipe do
         nil_attrs = filter_nil_attrs(recipe)
 
         if Enum.empty?(nil_attrs) do
-          case Item.any_invalid?(recipe.ingredients) do
+          case Ingredient.any_invalid?(recipe.ingredients) do
             {:error, _items} ->
               {:error, "There are/is itens with error", recipe}
 
@@ -72,6 +72,7 @@ defmodule MealPlanner.Recipe do
   defp filter_nil_attrs(recipe) do
     recipe
     |> Map.keys()
+    |> Enum.sort()
     |> Enum.reduce(
       [],
       fn attr, acc ->

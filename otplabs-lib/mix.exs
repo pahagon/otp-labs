@@ -47,7 +47,7 @@ defmodule OTPLabs.MixProject do
       {:ex_doc, "~> 0.18.4", only: :dev},
       {:earmark, "~> 1.4.46", only: :dev},
       {:dialyxir, "~> 1.4.3", only: [:dev]},
-      {:horde, "~> 0.9.0"},
+      {:horde, "~> 0.9"},
       {:mnesiac, "~> 0.3"},
     ]
   end

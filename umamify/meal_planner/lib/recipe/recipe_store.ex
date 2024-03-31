@@ -21,7 +21,7 @@ defmodule MealPlanner.Mnesiac.RecipeStore do
     copy_store()
   end
 
-  @type recipe_record_t :: {:recipe, integer(), String.t(), String.t(), list(Recipe.Item.t())}
+  @type recipe_record_t :: {:recipe, integer(), String.t(), String.t(), list(Recipe.Ingredient.t())}
 
   @doc ~S"""
   Serialization
@@ -43,8 +43,8 @@ defmodule MealPlanner.Mnesiac.RecipeStore do
   This function create a recipe.
 
   ## Examples
-      iex> item_1 = %MealPlanner.Recipe.Item{name: "pasta", qty: 0.1, unit: :kg}
-      iex> item_2 = %MealPlanner.Recipe.Item{name: "chicken", qty: 0.3, unit: :kg}
+      iex> item_1 = %MealPlanner.Recipe.Ingredient{name: "pasta", quantity: 0.1, unit: :kg}
+      iex> item_2 = %MealPlanner.Recipe.Ingredient{name: "chicken", quantity: 0.3, unit: :kg}
       iex> itens = [item_1, item_2]
       iex> recipe = %MealPlanner.Recipe{id: 1, title: "Chicken Pasta", instructions: "Cookie", ingredients: itens}
       iex> MealPlanner.Mnesiac.RecipeStore.create(recipe)
@@ -72,8 +72,8 @@ defmodule MealPlanner.Mnesiac.RecipeStore do
   This function list persisted recipes.
 
   ## Examples
-      iex> item_1 = %MealPlanner.Recipe.Item{name: "pasta", qty: 0.1, unit: :kg}
-      iex> item_2 = %MealPlanner.Recipe.Item{name: "chicken", qty: 0.3, unit: :kg}
+      iex> item_1 = %MealPlanner.Recipe.Ingredient{name: "pasta", quantity: 0.1, unit: :kg}
+      iex> item_2 = %MealPlanner.Recipe.Ingredient{name: "chicken", quantity: 0.3, unit: :kg}
       iex> itens = [item_1, item_2]
       iex> recipe = %MealPlanner.Recipe{id: 2, title: "Chicken Pasta", instructions: "Cookie", ingredients: itens}
       iex> MealPlanner.Mnesiac.RecipeStore.create(recipe)
@@ -82,8 +82,8 @@ defmodule MealPlanner.Mnesiac.RecipeStore do
         %MealPlanner.Recipe{
           id: 2,
           ingredients: [
-            %MealPlanner.Recipe.Item{name: "pasta", qty: 0.1, unit: :kg},
-            %MealPlanner.Recipe.Item{name: "chicken", qty: 0.3, unit: :kg}
+            %MealPlanner.Recipe.Ingredient{name: "pasta", quantity: 0.1, unit: :kg},
+            %MealPlanner.Recipe.Ingredient{name: "chicken", quantity: 0.3, unit: :kg}
           ],
           instructions: "Cookie",
           title: "Chicken Pasta"

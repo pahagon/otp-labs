@@ -35,9 +35,12 @@ defmodule MealPlanner.MixProject do
       {:earmark, "~> 1.4.46", only: :dev},
       {:dialyxir, "~> 1.4.3", only: [:dev]},
       {:libcluster, "~> 3.3.3"},
-      {:otplabs, "~> 0.1.0"},
-      # {:otplabs, path: "../../otplabs-lib"},
+      # {:otplabs, "~> 0.1.0"},
+      {:otplabs, path: "../../otplabs-lib"},
       {:timex, "~> 3.7.11"},
+
+      {:httpoison, "~> 1.8"},
+      {:floki, "~> 0.36"},
     ]
   end
 end

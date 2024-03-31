@@ -1,36 +1,36 @@
-defmodule MealPlanner.Recipe.Item do
+defmodule MealPlanner.Recipe.Ingredient do
   @moduledoc ~S"""
-  This module represents Recipe Item.
+  This module represents Recipe.Ingredient.
   """
 
-  defstruct name: nil, qty: nil, unit: nil
+  defstruct name: nil, quantity: nil, unit: nil
 
   @typedoc ~S"""
-  Type that represents Recipe Item.
+  Type that represents Recipe.Ingredient.
   """
-  @type t :: %__MODULE__{name: String.t(), qty: float(), unit: atom()}
+  @type t :: %__MODULE__{name: String.t(), quantity: float(), unit: atom()}
 
   @doc ~S"""
   This function check if is an item is valid
 
   ## Examples
-      iex> r_item = %MealPlanner.Recipe.Item{name: "meat", qty: 1.0, unit: :kg}
-      iex> MealPlanner.Recipe.Item.valid?(r_item)
+      iex> r_item = %MealPlanner.Recipe.Ingredient{name: "meat", quantity: 1.0, unit: :kg}
+      iex> MealPlanner.Recipe.Ingredient.valid?(r_item)
       {:ok, r_item}
 
-      iex> r_item = %MealPlanner.Recipe.Item{}
-      iex> MealPlanner.Recipe.Item.valid?(r_item)
-      {:error, "qty is nil, unit is nil, name is nil", r_item}
+      iex> r_item = %MealPlanner.Recipe.Ingredient{}
+      iex> MealPlanner.Recipe.Ingredient.valid?(r_item)
+      {:error, "unit is nil, quantity is nil, name is nil", r_item}
 
-      iex> r_item = %MealPlanner.Recipe.Item{qty: 1.0, unit: :kg}
-      iex> MealPlanner.Recipe.Item.valid?(r_item)
+      iex> r_item = %MealPlanner.Recipe.Ingredient{quantity: 1.0, unit: :kg}
+      iex> MealPlanner.Recipe.Ingredient.valid?(r_item)
       {:error, "name is nil", r_item}
 
-      iex> r_item = %MealPlanner.Recipe.Item{name: "", qty: 1.0, unit: :kg}
-      iex> MealPlanner.Recipe.Item.valid?(r_item)
+      iex> r_item = %MealPlanner.Recipe.Ingredient{name: "", quantity: 1.0, unit: :kg}
+      iex> MealPlanner.Recipe.Ingredient.valid?(r_item)
       {:error, "name is empty", r_item}
 
-      iex> MealPlanner.Recipe.Item.valid?(nil)
+      iex> MealPlanner.Recipe.Ingredient.valid?(nil)
       {:error, "item is nil", nil}
   """
   @spec valid?(__MODULE__.t()) :: {:ok, __MODULE__.t()} | {:error, String.t(), __MODULE__.t()}
@@ -55,6 +55,7 @@ defmodule MealPlanner.Recipe.Item do
   defp filter_nil_attrs(item) do
     item
     |> Map.keys()
+    |> Enum.sort()
     |> Enum.reduce(
       [],
       fn attr, acc ->
@@ -78,13 +79,13 @@ defmodule MealPlanner.Recipe.Item do
   This function check if is an item is valid
 
   ## Examples
-      iex> item_1 = %MealPlanner.Recipe.Item{name: "meat", qty: 1.0, unit: :kg}
-      iex> item_2 = %MealPlanner.Recipe.Item{name: "chicken", qty: 2.0, unit: :kg}
-      iex> MealPlanner.Recipe.Item.any_invalid?([item_1, item_2])
+      iex> item_1 = %MealPlanner.Recipe.Ingredient{name: "meat", quantity: 1.0, unit: :kg}
+      iex> item_2 = %MealPlanner.Recipe.Ingredient{name: "chicken", quantity: 2.0, unit: :kg}
+      iex> MealPlanner.Recipe.Ingredient.any_invalid?([item_1, item_2])
       {:ok, [item_1, item_2]}
 
-      iex> item_3 = %MealPlanner.Recipe.Item{}
-      iex> MealPlanner.Recipe.Item.any_invalid?([item_3])
+      iex> item_3 = %MealPlanner.Recipe.Ingredient{}
+      iex> MealPlanner.Recipe.Ingredient.any_invalid?([item_3])
       {:error, [item_3]}
   """
   @spec any_invalid?(list(__MODULE__.t())) ::

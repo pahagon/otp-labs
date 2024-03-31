@@ -26,7 +26,13 @@ defmodule OTPLabs.Mnesia.NodeObserver do
   def handle_info({:nodeup, node, _node_type}, state) do
     Logger.log(:info, "[#{__MODULE__}].handle_info :nodeup - #{inspect(node)} ")
 
-    Mnesiac.connect(node)
+    case Mnesiac.connect(node) do
+      {:ok, _} ->
+        Logger.log(:info, "Connected to #{inspect(node)}")
+
+      {:error, reason} ->
+        Logger.log(:error, "Failed to connect to #{inspect(node)}: #{inspect(reason)}")
+    end
 
     {:noreply, state}
   end

@@ -25,9 +25,9 @@ defmodule MealPlanner.Suggestion do
 
       iex> s = %MealPlanner.Suggestion{}
       iex> MealPlanner.Suggestion.valid?(s)
-      {:error, "user_id is nil, recipe is nil, day is nil, period is nil", s}
+      {:error, "user_id is nil, recipe is nil, period is nil, day is nil", s}
 
-      iex> item = %MealPlanner.Recipe.Item{name: "pasta", qty: 0.1, unit: :kg}
+      iex> item = %MealPlanner.Recipe.Ingredient{name: "pasta", quantity: 0.1, unit: :kg}
       iex> recipe = %MealPlanner.Recipe{id: 1, title: "Chicken Pasta", instructions: "Cookie", ingredients: [item]}
       iex> day = ~D[2022-01-01]
       iex> period = Umamify.Period.calc(~N[2022-01-01 06:00:00])
@@ -58,6 +58,7 @@ defmodule MealPlanner.Suggestion do
   defp filter_nil_attrs(suggestion) do
     suggestion
     |> Map.keys()
+    |> Enum.sort()
     |> Enum.reduce(
       [],
       fn attr, acc ->

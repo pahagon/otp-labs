@@ -15,9 +15,17 @@ defmodule OTPLabs.Mnesia.Supervisor do
 
   @impl true
   def init(opts) do
-    Logger.log(:info, "init #{__MODULE__}")
+    Logger.log(:info, "init #{__MODULE__}[node:[#{node()}], nodelist[#{inspect(Node.list())}], opt[#{inspect(opts)}]")
 
-    Mnesiac.init_mnesia(Node.list())
+    case Mnesiac.init_mnesia(Node.list()) do
+        :ok ->
+            Logger.log(:info, "Mnesia started")
+            {:ok, opts}
+
+        {:error, reason} ->
+            Logger.log(:error, "Mnesia failed to start: #{inspect(reason)}")
+            {:stop, reason}
+    end
 
     opts = Keyword.put(opts, :strategy, :one_for_one)
     Supervisor.init([], opts)
