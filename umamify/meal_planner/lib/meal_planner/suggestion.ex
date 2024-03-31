@@ -25,7 +25,7 @@ defmodule MealPlanner.Suggestion do
 
       iex> s = %MealPlanner.Suggestion{}
       iex> MealPlanner.Suggestion.valid?(s)
-      {:error, "user_id is nil, recipe is nil, period is nil, day is nil", s}
+      {:error, "user_id is nil, recipe is nil, day is nil, period is nil", s}
 
       iex> item = %MealPlanner.Recipe.Item{name: "pasta", qty: 0.1, unit: :kg}
       iex> recipe = %MealPlanner.Recipe{id: 1, title: "Chicken Pasta", instructions: "Cookie", ingredients: [item]}

@@ -4,7 +4,7 @@ defmodule OTPLabs.MixProject do
   def project do
     [
       app: :otplabs,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       description: description(),
@@ -42,11 +42,12 @@ defmodule OTPLabs.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.11", only: :dev},
-      {:earmark, "~> 0.1", only: :dev},
-      {:dialyxir, "~> 0.3", only: [:dev]},
-      {:horde, "~> 0.8.7"},
+      {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.18.0", only: :test},
+      {:ex_doc, "~> 0.18.4", only: :dev},
+      {:earmark, "~> 1.4.46", only: :dev},
+      {:dialyxir, "~> 1.4.3", only: [:dev]},
+      {:horde, "~> 0.9.0"},
       {:mnesiac, "~> 0.3"},
     ]
   end

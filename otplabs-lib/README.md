@@ -14,7 +14,7 @@ by adding `otplabs` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:otplabs, "~> 0.1.0"}
+    {:otplabs, "~> 0.1.1"}
   ]
 end
 ```

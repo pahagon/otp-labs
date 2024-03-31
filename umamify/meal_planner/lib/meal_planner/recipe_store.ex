@@ -16,7 +16,7 @@ defmodule MealPlanner.Mnesiac.RecipeStore do
 
   @impl true
   def resolve_conflict(node) do
-    Logger.warn("RESOLVE CONFLICT #{inspect(node())} vs #{inspect(node)}")
+    Logger.warning("RESOLVE CONFLICT #{inspect(node())} vs #{inspect(node)}")
 
     copy_store()
   end

@@ -37,7 +37,7 @@ defmodule MealPlanner.Recipe do
 
       iex> recipe = %MealPlanner.Recipe{}
       iex> MealPlanner.Recipe.valid?(recipe)
-      {:error, "title is nil, instructions is nil, ingredients is nil, id is nil", recipe}
+      {:error, "ingredients is nil, title is nil, instructions is nil, id is nil", recipe}
 
       iex> MealPlanner.Recipe.valid?(nil)
       {:error, "recipe is nil", nil}

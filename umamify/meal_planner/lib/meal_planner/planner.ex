@@ -6,7 +6,6 @@ defmodule MealPlanner.Planner do
   alias Umamify.User
   alias Umamify.Geolocation
 
-  alias MealPlanner.Recipe
   alias MealPlanner.Suggestion
   alias MealPlanner.Mnesia.SuggestionStore, as: SuggStore
 
@@ -28,7 +27,7 @@ defmodule MealPlanner.Planner do
   end
 
   @spec default(Geolocation.t(), Timex.DateTime.t()) :: Suggestion.t()
-  def default(geo, datetime) do
+  def default(_geo, _datetime) do
   end
 
   def refuse_suggestion(suggestion, user, geo, datetime) do

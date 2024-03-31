@@ -20,7 +20,7 @@ defmodule MealPlanner.Recipe.Item do
 
       iex> r_item = %MealPlanner.Recipe.Item{}
       iex> MealPlanner.Recipe.Item.valid?(r_item)
-      {:error, "unit is nil, qty is nil, name is nil", r_item}
+      {:error, "qty is nil, unit is nil, name is nil", r_item}
 
       iex> r_item = %MealPlanner.Recipe.Item{qty: 1.0, unit: :kg}
       iex> MealPlanner.Recipe.Item.valid?(r_item)
