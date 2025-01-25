@@ -3,6 +3,7 @@
     hosts: localhost
     connection: localhost
     vars:
+      node_version: 20.12.0
       erlang_version: 26.2.3
       elixir_version: 1.16.2
       minikube_version: 1.26.1
@@ -22,7 +23,6 @@
             - build-essential
             - m4
             - libncurses5-dev
-            - libwxgtk3.0-gtk3-dev
             - libgl1-mesa-dev
             - libglu1-mesa-dev
             - libpng-dev
@@ -71,3 +71,18 @@
       - name: Install kubectl {{kubectl_version}} with asdf
         command: asdf install kubectl {{kubectl_version}}
 
+      - name: Add nodejs plugin to asdf [https://github.com/asdf-vm/asdf-nodejs]
+        command: "asdf plugin-add nodejs"
+        register: node_add
+        failed_when: node_add == 2
+
+      - name: Install nodejs {{node_version}} with asdf
+        command: asdf install nodejs {{node_version}}
+
+      - name: Set global version for nodejs to {{node_version}}
+        command: "asdf global nodejs {{node_version}}"
+
+      - name: Install "yarn" node.js package globally
+        npm:
+          name: yarn
+          global: yes
